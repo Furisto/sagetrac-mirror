@@ -127,6 +127,20 @@ class RelativeInterior(ConvexSet_relatively_open):
         """
         return self._polyhedron.ambient_dim()
 
+    def an_affine_basis(self):
+        r"""
+        Return points that form an affine basis for the affine hull.
+
+        The points are guaranteed to lie in the topological closure of ``self``.
+
+        EXAMPLES::
+
+            sage: segment = Polyhedron([[1, 0], [0, 1]])
+            sage: segment.relative_interior().an_affine_basis()
+            [A vertex at (1, 0), A vertex at (0, 1)]
+        """
+        return self._polyhedron.an_affine_basis()
+
     def dim(self):
         r"""
         Return the dimension of ``self``.
@@ -330,3 +344,39 @@ class RelativeInterior(ConvexSet_relatively_open):
             False
         """
         return not (self == other)
+
+    def dilation(self, scalar):
+        """
+        Return the dilated (uniformly stretched) set.
+
+        INPUT:
+
+        - ``scalar`` -- A scalar
+        """
+        return self.closure().dilation(scalar).relative_interior()
+
+    def linear_transformation(self, linear_transf, **kwds):
+        """
+        Return the linear transformation of ``self``.
+
+        By [Roc1970]_, Theorem 6.6, the linear transformation of a relative interior
+        is the relative interior of the linear transformation.
+
+        INPUT:
+
+        - ``linear_transf`` -- a matrix
+        - ``**kwds`` -- passed to the :meth:`linear_transformation` method of
+          the closure of ``self``.
+        """
+        return self.closure().linear_transformation(linear_transf, **kwds).relative_interior()
+
+    def translation(self, displacement):
+        """
+        Return the translation of ``self`` by a ``displacement`` vector.
+
+        INPUT:
+
+        - ``displacement`` -- a displacement vector or a list/tuple of
+          coordinates that determines a displacement vector
+        """
+        return self.closure().translation(displacement).relative_interior()
