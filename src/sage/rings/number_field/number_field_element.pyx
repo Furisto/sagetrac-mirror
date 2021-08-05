@@ -3618,6 +3618,42 @@ cdef class NumberFieldElement(FieldElement):
         """
         return all(a in ZZ for a in self.absolute_minpoly())
 
+    def is_prime(self):
+        r"""
+        Return ``True`` if and only if this element is a prime element
+        of the ring of integers of this number field.
+
+        .. WARNING::
+
+            The behavior of :meth:`is_prime` in :class:`NumberField` deviates
+            from the general definition of prime elements in a ring, according
+            to which fields have no prime elements.
+
+        EXAMPLES::
+
+            sage: K.<t> = NumberField(x^4+x+1)
+            sage: K(7).is_prime()
+            True
+            sage: K(5).is_prime()
+            False
+            sage: (-2*t^3 + t^2 - 1).is_prime()
+            True
+            sage: K(7/13).is_prime()
+            False
+            sage: K(1).is_prime()
+            False
+            sage: K(0).is_prime()
+            False
+
+        Note that the rationals are *not* an instance of :class:`NumberField`,
+        and :meth:`Rational.is_prime` *does* follow the general definition of
+        prime elements in a ring (i.e., it always returns ``False``):
+
+            sage: (7/1).is_prime()
+            False
+        """
+        return super().is_prime()
+
     def matrix(self, base=None):
         r"""
         If base is None, return the matrix of right multiplication by the

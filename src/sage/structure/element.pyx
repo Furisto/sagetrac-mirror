@@ -2845,6 +2845,19 @@ cdef class RingElement(ModuleElement):
             sage: RR(2).is_prime()
             False
 
+        The :class:`NumberField` class redefines the meaning of
+        :meth:`is_prime`: It determines primality in the ring of
+        integers of the field. (This does not apply to :class:`QQ`.)
+
+            sage: (1+i).is_prime()
+            True
+            sage: K(5).is_prime()
+            False
+            sage: K(7).is_prime()
+            True
+            sage: QQ(7).is_prime()
+            False
+
         For integers, prime numbers are redefined to be positive::
 
             sage: RingElement.is_prime(-2)
