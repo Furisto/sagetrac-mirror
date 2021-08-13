@@ -21,6 +21,8 @@ from sage.misc.misc import _stable_uniq
 from sage.symbolic.expression import is_Expression
 from sage.symbolic.callable import is_CallableSymbolicExpression
 from sage.symbolic.ring import SymbolicRing, SR, is_SymbolicVariable
+from sage.functions.boolean import AndSymbolic
+
 
 from .set import Set, Set_base, Set_boolean_operators, Set_add_sub_operators
 
@@ -104,6 +106,13 @@ class ConditionSet(Set_generic, Set_base, Set_boolean_operators, Set_add_sub_ope
         sage: Q4.arguments()
         (a, b, c, d)
 
+    The ``ConditionSet`` constructor flattens symbolic 'and's::
+
+        sage: from sage.functions.boolean import and_symbolic
+        sage: R = RealSet.real_line()
+        sage: ConditionSet(R, and_symbolic(x>0, x<2), x<=1, vars=['x'])
+        { x ∈ (-oo, +oo) : x > 0, x < 2, x <= 1 }
+
     TESTS::
 
         sage: TestSuite(P_inter_B).run(skip='_test_pickling')  # cannot pickle lambdas
@@ -152,7 +161,14 @@ class ConditionSet(Set_generic, Set_base, Set_boolean_operators, Set_add_sub_ope
                     raise TypeError('use callable symbolic expressions or provide variable names')
                 if vars is None:
                     vars = tuple(SR.var(name) for name in names)
-                callable_symbolic_predicates.append(predicate.function(*vars))
+                def clauses(predicate):
+                    if isinstance(predicate.operator(), AndSymbolic):
+                        for op in predicate.operands():
+                            yield from clauses(op)
+                    else:
+                        yield predicate
+                callable_symbolic_predicates.extend(clause.function(*vars)
+                                                    for clause in clauses(predicate))
             else:
                 other_predicates.append(predicate)
 
