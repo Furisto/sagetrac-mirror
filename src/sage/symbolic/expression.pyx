@@ -4283,6 +4283,11 @@ cdef class Expression(CommutativeRingElement):
             0
             sage: False & (x > 0)
             0
+
+            sage: var('y')
+            y
+            sage: (x > 0) & (x < 1) & (y > 0) & (y < 1)
+            and_symbolic(x > 0, x < 1, y > 0, y < 1)
         """
         from sage.functions.boolean import and_symbolic
         return and_symbolic(self, other)
@@ -4295,6 +4300,11 @@ cdef class Expression(CommutativeRingElement):
 
             sage: (x < 0) | (x > 1)
             or_symbolic(x < 0, x > 1)
+
+            sage: var('y')
+            y
+            sage: (x < 0) | (x > 1) | (y < 0) | (y > 1)
+            or_symbolic(x < 0, x > 1, y < 0, y > 1)
         """
         from sage.functions.boolean import or_symbolic
         return or_symbolic(self, other)
