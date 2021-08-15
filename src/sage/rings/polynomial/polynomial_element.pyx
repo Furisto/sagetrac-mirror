@@ -833,66 +833,6 @@ cdef class Polynomial(CommutativeAlgebraElement):
         # For testing
         return self._compiled
 
-    def _fast_float_(self, *vars):
-        """
-        Return a quickly-evaluating function on floats.
-
-        EXAMPLES::
-
-            sage: R.<t> = QQ[]
-            sage: f = t^3-t
-            sage: ff = f._fast_float_()
-            sage: ff(10)
-            990.0
-
-        Horner's method is used::
-
-            sage: f = (t+10)^3; f
-            t^3 + 30*t^2 + 300*t + 1000
-            sage: list(f._fast_float_())
-            ['load 0', 'push 30.0', 'add', 'load 0', 'mul', 'push 300.0', 'add', 'load 0', 'mul', 'push 1000.0', 'add']
-
-        TESTS::
-
-            sage: f = t + 2 - t
-            sage: ff = f._fast_float_()
-            sage: ff(3)
-            2.0
-            sage: list(f._fast_float_())
-            ['push 2.0']
-
-            sage: f = t - t
-            sage: ff = f._fast_float_()
-            sage: ff(3)
-            0.0
-            sage: list(f._fast_float_())
-            ['push 0.0']
-        """
-        from sage.ext.fast_eval import fast_float_arg, fast_float_constant
-        var = self._parent._names[0]
-        if not vars:
-            x = fast_float_arg(0)
-        elif var in vars:
-            x = fast_float_arg(list(vars).index(var))
-        else:
-            raise ValueError("free variable: %s" % var)
-        cdef int i, d = self.degree()
-        expr = x
-        if d == -1:
-            return fast_float_constant(0)
-        coeff = self.get_unsafe(d)
-        if d == 0:
-            return fast_float_constant(coeff)
-        if coeff != 1:
-            expr *= fast_float_constant(coeff)
-        for i from d > i >= 0:
-            coeff = self.get_unsafe(i)
-            if coeff:
-                expr += fast_float_constant(coeff)
-            if i > 0:
-                expr *= x
-        return expr
-
     def _fast_callable_(self, etb):
         r"""
         Given an ExpressionTreeBuilder, return an Expression representing
@@ -4885,7 +4825,24 @@ cdef class Polynomial(CommutativeAlgebraElement):
         """
         Let f and g be two polynomials. Then this function returns the
         monic least common multiple of f and g.
+
+        TESTS:
+
+        Check that :trac:`32033` has been fixed::
+
+            sage: R.<t> = GF(3)[]
+            sage: lcm(R(0), R(0))
+            0
+
+        ::
+
+            sage: R.<t> = RR[]
+            sage: lcm(R(0), R(0))
+            0
         """
+        if self.is_zero() or other.is_zero():
+            P = self.parent()
+            return P.zero()
         f = self*other
         g = self.gcd(other)
         q = f//g
@@ -4896,6 +4853,9 @@ cdef class Polynomial(CommutativeAlgebraElement):
         Let f and g be two polynomials. Then this function returns the
         monic least common multiple of f and g.
         """
+        if self.is_zero() or other.is_zero():
+            P = self.parent()
+            return P.zero()
         f = self*other
         g = self.gcd(other)
         q = f//g
