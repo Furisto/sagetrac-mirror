@@ -1078,8 +1078,11 @@ cdef class Expression(CommutativeRingElement):
             sage: SR(CDF.0)._maxima_init_()
             '1.0000000000000000*%i'
         """
-        from sage.symbolic.expression_conversions import InterfaceInit
-        return InterfaceInit(I)(self)
+        from sage.symbolic.expression_conversions import InterfaceInit, MaximaConverter
+        if I.name().startswith("maxima"):
+            return MaximaConverter(I)(self)
+        else:
+            return InterfaceInit(I)(self)
 
     def _gap_init_(self):
         """
