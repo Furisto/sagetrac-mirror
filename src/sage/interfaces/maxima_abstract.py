@@ -501,6 +501,11 @@ class MaximaAbstract(ExtraTabCompletion, Interface):
         """
         Returns the equality symbol in Maxima.
 
+        This is only used for
+        :meth:`~sage.symbolic.expression.Expression.__maxima_init_solve_`,
+        not for any normal expression conversion by
+        :class:`sage.symbolic.expression_conversions.MaximaConverter`.
+
         INPUT: none
 
         OUTPUT: string
@@ -511,8 +516,10 @@ class MaximaAbstract(ExtraTabCompletion, Interface):
              '='
              sage: var('x y')
              (x, y)
-             sage: maxima(x == y)
-             _SAGE_VAR_x=_SAGE_VAR_y
+             sage: (x == y)._maxima_init_solve_()
+             '(_SAGE_VAR_x)=(_SAGE_VAR_y)'
+             sage: (x == y)._maxima_init_()
+             'equal(_SAGE_VAR_x, _SAGE_VAR_y)'
         """
         return '='
 
@@ -520,6 +527,10 @@ class MaximaAbstract(ExtraTabCompletion, Interface):
         """
         Returns the inequality symbol in Maxima.
 
+        This is only used for
+        :meth:`~sage.symbolic.expression.Expression.__maxima_init_solve_`,
+        not for any normal expression conversion by
+        :class:`sage.symbolic.expression_conversions.MaximaConverter`.
         INPUT: none
 
         OUTPUT: string
@@ -528,8 +539,10 @@ class MaximaAbstract(ExtraTabCompletion, Interface):
 
              sage: maxima._inequality_symbol()
              '#'
-             sage: maxima((x != 1))
-             _SAGE_VAR_x#1
+             sage: (x != 1)._maxima_init_solve_()
+             '(_SAGE_VAR_x)#(1)'
+             sage: (x != 1)._maxima_init_()
+             'notequal(_SAGE_VAR_x, 1)'
         """
         return '#'
 
