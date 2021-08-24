@@ -464,6 +464,8 @@ class BackendBase(SageObject):
             sage: out = backend.latex_formatter([1/2, x, 3/4, ZZ], concatenate=True)
             sage: out.html.get_str()
             '<html>\\[\\newcommand{\\Bold}[1]{\\mathbf{#1}}\\frac{1}{2} x \\frac{3}{4} \\Bold{Z}\\]</html>'
+            sage: out.latex.get_str()
+            '$$\\newcommand{\\Bold}[1]{\\mathbf{#1}}\\frac{1}{2} x \\frac{3}{4} \\Bold{Z}$$'
 
         TESTS::
 
@@ -475,7 +477,12 @@ class BackendBase(SageObject):
         concatenate = kwds.get('concatenate', False)
         from sage.misc.html import html
         from sage.repl.rich_output.output_browser import OutputHtml
-        return OutputHtml(html(obj, concatenate=concatenate, strict=True))
+        out = OutputHtml(html(obj, concatenate=concatenate, strict=True))
+        if out.latex is None:
+            from sage.misc.latex import latex
+            from sage.repl.rich_output.buffer import OutputBuffer
+            out.latex = OutputBuffer(r'\[' + latex(obj, combine_all=True) + r'\]')
+        return out
 
     def set_underscore_variable(self, obj):
         """
