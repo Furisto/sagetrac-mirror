@@ -474,7 +474,7 @@ class BackendBase(SageObject):
             sage: out.latex.get_str()
             '\\[{\\setlength{\\arraycolsep}{2ex}\n\\begin{array}{r|*{2}{r}}\n\\multicolumn{1}{c|}{\\ast}&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}}\\]'
 
-TESTS::
+        TESTS::
 
             sage: backend.latex_formatter([], concatenate=False).html.get_str()
             '<html>\\[\\newcommand{\\Bold}[1]{\\mathbf{#1}}\\left[\\right]\\]</html>'
