@@ -1113,4 +1113,5 @@ class OperationTable(SageObject):
 
         # Finish
         table.append('\\end{array}')
-        return ''.join(table)
+
+        return r'<html>\[' + ''.join(table) + r'\]</html>'
