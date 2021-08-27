@@ -13,11 +13,11 @@ For an overview of the free module API, see :doc:`free_module`.
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -47,7 +47,7 @@ class FreeModuleMorphism(SageMorphism):
     r"""
     Create a homomorphism between finitely generated free graded modules.
 
-    INPUT::
+    INPUT:
 
     - ``parent`` -- A homspace in the category of finitely generated free
         modules.
@@ -55,7 +55,7 @@ class FreeModuleMorphism(SageMorphism):
     - ``values`` -- A list of elements in the codomain.  Each element
         corresponds (by their ordering) to a module generator in the domain.
 
-    OUTPUT:: A module homomorphism defined by sending each generator to its
+    OUTPUT: A module homomorphism defined by sending each generator to its
     corresponding value.
 
     EXAMPLES::
@@ -135,7 +135,7 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         The degree of this homomorphism.
 
-        OUTPUT:: The integer degree of this homomorphism, or ``None`` if this is
+        OUTPUT: The integer degree of this homomorphism, or ``None`` if this is
         the trivial homomorphism.
 
         EXAMPLES::
@@ -163,7 +163,7 @@ class FreeModuleMorphism(SageMorphism):
         The values under this homomorphism corresponding to the generators of
         the domain module.
 
-        OUTPUT:: A sequence of elements of the codomain module.
+        OUTPUT: A sequence of elements of the codomain module.
 
         EXAMPLES::
 
@@ -186,7 +186,7 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         Compare this homomorphism to the given homomorphism.
 
-        INPUT::
+        INPUT:
 
         - ``other`` -- An instance of this class.
 
@@ -196,7 +196,7 @@ class FreeModuleMorphism(SageMorphism):
           and only if the homomorphisms are not equal.  Otherwise,
           return ``False``.
 
-        OUTPUT:: A boolean.
+        OUTPUT: A boolean.
 
         EXAMPLES::
 
@@ -237,12 +237,12 @@ class FreeModuleMorphism(SageMorphism):
         and codomain is given by the formula `(f+g)(x) = f(x) + g(x)` for
         every `x` in the domain of `f`.
 
-        INPUT::
+        INPUT:
 
         - ``g`` -- A homomorphism with the same domain and codomain as this
           homomorphism.
 
-        OUTPUT:: The pointwise sum homomorphism of this and the given
+        OUTPUT: The pointwise sum homomorphism of this and the given
         homomorphism.
 
         EXAMPLES::
@@ -278,7 +278,7 @@ class FreeModuleMorphism(SageMorphism):
         The additive inverse of this homomorphism with respect to the group
         structure given by pointwise sum.
 
-        OUTPUT:: An instance of this class.
+        OUTPUT: An instance of this class.
 
         EXAMPLES::
 
@@ -305,7 +305,7 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         The pointwise difference between this and the given homomorphism.
 
-        OUTPUT:: An instance of this class.
+        OUTPUT: An instance of this class.
 
         EXAMPLES::
 
@@ -330,7 +330,7 @@ class FreeModuleMorphism(SageMorphism):
         The composition of the given homomorphism ``g``, followed by this
         homomorphisms.
 
-        OUTPUT:: A homomorphism from the domain of this homomorphism, into the
+        OUTPUT: A homomorphism from the domain of this homomorphism, into the
         codomain of the homomorphism ``g``.
 
         EXAMPLES::
@@ -375,7 +375,7 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         Decide if this homomomorphism is trivial.
 
-        OUTPUT:: The boolean value ``True`` if this homomorphism is trivial, and
+        OUTPUT: The boolean value ``True`` if this homomorphism is trivial, and
         ``False`` otherwise.
 
         EXAMPLES::
@@ -399,7 +399,7 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         Decide if this homomomorphism is the identity endomorphism.
 
-        OUTPUT:: The boolean value ``True`` if this homomorphism is the
+        OUTPUT: The boolean value ``True`` if this homomorphism is the
         identity, and ``False`` otherwise.
 
         EXAMPLES::
@@ -428,11 +428,11 @@ class FreeModuleMorphism(SageMorphism):
         r"""
         Evaluate the homomorphism at the given domain element ``x``.
 
-        INPUT::
+        INPUT:
 
         - ``x`` -- An element of the domain of this morphism.
 
-        OUTPUT:: The module element of the codomain which is the value of ``x``
+        OUTPUT: The module element of the codomain which is the value of ``x``
         under this homomorphism.
 
         EXAMPLES::
@@ -506,11 +506,11 @@ class FreeModuleMorphism(SageMorphism):
         function cannot be presented since we do not know the degree of its
         codomain.  In this case, the return value is ``None``.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- An integer degree.
 
-        OUTPUT:: A linear function of finite dimensional vectorspaces over the
+        OUTPUT: A linear function of finite dimensional vectorspaces over the
         ground field of the algebra for this module.  The domain is isomorphic
         to the vectorspace of domain elements of degree ``n`` of this free
         module, via the choice of basis given by

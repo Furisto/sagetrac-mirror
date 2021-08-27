@@ -9,11 +9,11 @@ For an overview of the API, see :doc:`fpa_module`.
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added 
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -36,14 +36,14 @@ class FPA_Element(FP_Element):
     Create a module element of a finitely presented graded module over
     the Steenrod algebra.
 
-    INPUT::
+    INPUT:
 
     - ``module`` -- The parent instance of this module element.
 
     - ``coefficients`` -- A tuple of homogeneous elements of the algebra
       over which the module is defined.
 
-    OUTPUT:: The module element given by the coefficients.
+    OUTPUT: The module element given by the coefficients.
 
     .. NOTE:: Never use this constructor explicitly, but rather the parent's
         call method, or this class' __call__ method.  The reason for this

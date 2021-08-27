@@ -29,6 +29,7 @@ TESTS:
     running ._test_an_element() . . . pass
     running ._test_cardinality() . . . pass
     running ._test_category() . . . pass
+    running ._test_construction() . . . pass
     running ._test_elements() . . .
       Running the test suite of self.an_element()
       running ._test_category() . . . pass
@@ -51,11 +52,11 @@ TESTS:
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -80,7 +81,7 @@ def is_FreeModuleHomspace(x):
     r"""
     Check if the given object is of type FreeModuleHomspace.
 
-    OUTPUT:: The boolean ``True`` if and only if ``x`` is of type
+    OUTPUT: The boolean ``True`` if and only if ``x`` is of type
     FreeModuleHomspace, and ``False`` otherwise.
 
     EXAMPLES::
@@ -117,17 +118,17 @@ class FreeModuleHomspace(Homset):
         This function is used internally by the ()-method when creating
         homomorphisms.
 
-        INPUT::
+        INPUT:
 
         - ``values`` -- A tuple of values (i.e. elements of the
         codomain for this homset) corresponding bijectively to the generators
         of the domain of this homset, or the zero integer constant.
 
-        OUTPUT:: An instance of the morphism class.  The returned morphism is
+        OUTPUT: An instance of the morphism class.  The returned morphism is
         defined by mapping the module generators in the domain to the given
         values.
 
-        OUTPUT:: A module homomorphism.
+        OUTPUT: A module homomorphism.
 
         EXAMPLES::
 
@@ -161,7 +162,7 @@ class FreeModuleHomspace(Homset):
         r"""
         Return a morphism belonging to this homspace.
 
-        OUTPUT:: A morphism in this homspace.
+        OUTPUT: A morphism in this homspace.
 
         EXAMPLES::
 
@@ -183,7 +184,7 @@ class FreeModuleHomspace(Homset):
         r"""
         Return the trivial morphism of this homspace.
 
-        OUTPUT:: The morphism evaluating to the zero element for any element in
+        OUTPUT: The morphism evaluating to the zero element for any element in
         the domain.
 
         EXAMPLES::
@@ -205,7 +206,7 @@ class FreeModuleHomspace(Homset):
         r"""
         Return the identity morphism, if this is an endomorphism set.
 
-        OUTPUT:: The identity endomorphism.
+        OUTPUT: The identity endomorphism.
 
         TESTS:
 

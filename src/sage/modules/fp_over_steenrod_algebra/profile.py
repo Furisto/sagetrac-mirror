@@ -3,6 +3,7 @@ r"""
     mod p Steenrod algebra.
 
     .. NOTE::
+
         Palmieri pads all his profiles by adding a [0] to the beginning.
         Furthermore, when scanning over elements defined over an odd
         primary Steenrod Algebra, the Q part comes first, and then the P part.
@@ -13,7 +14,7 @@ r"""
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): initial version
+- Robert R. Bruner, Michael J. Catanzaro (2012): initial version
 
 """
 

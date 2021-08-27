@@ -248,11 +248,11 @@ modules::
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added 
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -282,14 +282,14 @@ class FreeModule(UniqueRepresentation, SageModule):
     Create a finitely generated free graded module over a connected graded
     algebra.
 
-    INPUT::
+    INPUT:
 
     - ``generator_degrees`` -- a tuple of integers defining
       the number of generators of the module, and their degrees.
 
     - ``algebra`` -- the connected algebra over which the module is defined.
 
-    OUTPUT:: The finitely generated free graded module on generators with
+    OUTPUT: The finitely generated free graded module on generators with
     degrees given by ``generator_degrees``.
 
     TESTS:
@@ -330,7 +330,7 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         The degrees of the module generators.
 
-        OUTPUT:: A tuple containing the degrees of the generators for this
+        OUTPUT: A tuple containing the degrees of the generators for this
         module, in the order that the generators were given when this module
         was constructed.
 
@@ -350,7 +350,7 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         Decide if this module is trivial or not.
 
-        OUTPUT:: The boolean value ``True`` if the module is trivial, and
+        OUTPUT: The boolean value ``True`` if the module is trivial, and
         ``False`` otherwise.
 
         EXAMPLES::
@@ -370,7 +370,7 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         The connectivity of this module.
 
-        OUTPUT:: An integer equal to the minimal degree of all the generators, if
+        OUTPUT: An integer equal to the minimal degree of all the generators, if
         this module is non-trivial.  Otherwise, `+\infty`.
 
         EXAMPLES::
@@ -400,13 +400,13 @@ class FreeModule(UniqueRepresentation, SageModule):
         This function is used internally by the ()-method when creating
         module elements, and should not be called by the user explicitly.
 
-        INPUT::
+        INPUT:
 
         - ``coefficients`` -- A tuple of coefficient (i.e. elements of the
         algebra for this module), an element of FreeModule, or the zero integer
         constant.
 
-        OUTPUT:: An instance of the element class with coefficients from
+        OUTPUT: An instance of the element class with coefficients from
         ``coefficients``, the element ``coefficients`` if it already was an
         element, or the zero module element.
 
@@ -441,12 +441,12 @@ class FreeModule(UniqueRepresentation, SageModule):
         This function chooses deterministically an element of the module in the
         given degree.
 
-        INPUT::
+        INPUT:
 
         - ``n`` --  the degree of the element to construct.  If the default
           value ``None`` is given, a degree will be chosen by the function.
 
-        OUTPUT:: An element of the given degree.
+        OUTPUT: An element of the given degree.
 
         EXAMPLES::
 
@@ -500,11 +500,11 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         A basis for the vectorspace of degree ``n`` module elements.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- an integer.
 
-        OUTPUT:: A sequence of homogeneous module elements of degree ``n``
+        OUTPUT: A sequence of homogeneous module elements of degree ``n``
         which is a basis for the vectorspace of all degree ``n`` module
         elements.
 
@@ -543,12 +543,12 @@ class FreeModule(UniqueRepresentation, SageModule):
         with respect to the basis of module elements given by
         :meth:`basis_elements`.
 
-        INPUT::
+        INPUT:
 
         - ``coordinates`` -- a sequence of elements of the ground field.
         - ``n`` -- an integer.
 
-        OUTPUT:: A module element of degree ``n``.
+        OUTPUT: A module element of degree ``n``.
 
         .. SEEALSO::
             :meth:`vector_presentation`, and :meth:`basis_elements`.
@@ -639,11 +639,11 @@ class FreeModule(UniqueRepresentation, SageModule):
         bijection taking the standard basis element `e_i` to the `i`-th
         element of the array returned by :meth:`basis_elements`.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- an integer degree.
 
-        OUTPUT:: A vectorspace over the ground field of the algebra over which
+        OUTPUT: A vectorspace over the ground field of the algebra over which
         this module is defined, isomorphic to the vectorspace of module
         elements of degree ``n``.
 
@@ -672,7 +672,7 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         Return the module generator with the given index.
 
-        OUTPUT:: An instance of the element class of this parent.
+        OUTPUT: An instance of the element class of this parent.
 
         EXAMPLES::
 
@@ -702,7 +702,7 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         Return all the module generators.
 
-        OUTPUT:: A list consisting instances of the element class of this
+        OUTPUT: A list consisting instances of the element class of this
         parent.
 
         EXAMPLES::
@@ -739,11 +739,11 @@ class FreeModule(UniqueRepresentation, SageModule):
         r"""
         Suspend the module by the given integer degree.
 
-        INPUT::
+        INPUT:
 
         - ``t`` -- An integer.
 
-        OUTPUT:: A module which is isomorphic to this module by a shift
+        OUTPUT: A module which is isomorphic to this module by a shift
         of degrees by the integer ``t``.
 
         EXAMPLES::

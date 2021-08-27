@@ -7,7 +7,7 @@ manipulation of homsets of finitely presented graded modules over the
 
 For an overview of the API, see :doc:`fpa_module`.
 
-TESTS:
+TESTS::
 
     sage: from sage.modules.fp_over_steenrod_algebra.fpa_module import FPA_Module
     sage: from sage.misc.sage_unittest import TestSuite
@@ -36,6 +36,7 @@ TESTS:
     running ._test_an_element() . . . pass
     running ._test_cardinality() . . . pass
     running ._test_category() . . . pass
+    running ._test_construction() . . . pass
     running ._test_elements() . . .
       Running the test suite of self.an_element()
       running ._test_category() . . . pass
@@ -58,11 +59,11 @@ TESTS:
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added 
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 

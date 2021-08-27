@@ -13,11 +13,11 @@ For an overview of the free module API, see :doc:`free_module`.
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added 
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -41,13 +41,13 @@ class FreeModuleElement(SageModuleElement):
     Create a module element of a finitely generated free graded module over
     a connected graded algebra.
 
-    INPUT::
+    INPUT:
 
     - ``module`` -- the parent instance of this module element.
 
     - ``coefficients`` -- a tuple of homogeneous algebra coefficients.
 
-    OUTPUT:: The module element given by the coefficients.
+    OUTPUT: The module element given by the coefficients.
 
     .. NOTE:: This constructor should not be used explicitly, instead use
           the parent's call method.  The reason for this is that the
@@ -117,7 +117,7 @@ class FreeModuleElement(SageModuleElement):
         r"""
         The coefficients of this module element.
 
-        OUTPUT:: A tuple of elements of the algebra over which this module is
+        OUTPUT: A tuple of elements of the algebra over which this module is
         defined.
 
         EXAMPLES::  
@@ -142,7 +142,7 @@ class FreeModuleElement(SageModuleElement):
         r"""
         The degree of this element.
 
-        OUTPUT:: the integer degree of this element, or None if this is the zero
+        OUTPUT: the integer degree of this element, or None if this is the zero
         element.
 
         EXAMPLES::
@@ -192,11 +192,11 @@ class FreeModuleElement(SageModuleElement):
         r"""
         Act by left multiplication on this element by ``a``.
 
-        INPUT::
+        INPUT:
 
         - ``a`` -- an element of the algebra this module is defined over.
 
-        OUTPUT:: the module element `a\cdot x` where `x` is this module element.
+        OUTPUT: the module element `a\cdot x` where `x` is this module element.
 
         EXAMPLES::
 
@@ -255,12 +255,12 @@ class FreeModuleElement(SageModuleElement):
         Implementation of this function allows Sage to make sense of the +
         operator for instances of this class.
 
-        INPUT::
+        INPUT:
 
         - ``other`` -- another element of this element's module.  Only elements
           of the same degree are allowed to be added together.
 
-        OUTPUT:: the module sum of this element and the given element ``other``.
+        OUTPUT: the module sum of this element and the given element ``other``.
 
         EXAMPLES::
 
@@ -313,7 +313,7 @@ class FreeModuleElement(SageModuleElement):
         Implementation of this function allows Sage to make sense of the ==
         operator for instances of this class.
 
-        INPUT::
+        INPUT:
 
         - ``other`` -- An instance of this class.
 
@@ -322,7 +322,7 @@ class FreeModuleElement(SageModuleElement):
           elements are equal.  If ``op`` == 3, then return ``True `` if and
           only if the elements are not equal.  Otherwise, return ``False``.
 
-        OUTPUT:: A boolean.
+        OUTPUT: A boolean.
 
         EXAMPLES::
 
@@ -389,7 +389,7 @@ class FreeModuleElement(SageModuleElement):
         When the element is zero, it has no well defined degree, and this
         function returns ``None``.
 
-        OUTPUT:: A vector of elements in the ground field of the algebra for
+        OUTPUT: A vector of elements in the ground field of the algebra for
         this module when this element is non-zero.  Otherwise, the value
         ``None``.
 
@@ -462,7 +462,7 @@ class FreeModuleElement(SageModuleElement):
         r"""
         Determine if this element is non-zero.
 
-        OUTPUT:: The boolean value True if this element is non-zero, and False
+        OUTPUT: The boolean value True if this element is non-zero, and False
         otherwise.
 
         EXAMPLES::

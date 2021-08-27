@@ -11,11 +11,11 @@ algebras.
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -54,7 +54,7 @@ def _CreateRelationsMatrix(module, relations, source_degs, target_degs):
     the matrix of linear transformations gotten by restricting `R` to the given
     source degrees.
 
-    INPUT::
+    INPUT:
 
     - ``module`` -- The module where the relations acts.
     - ``relations`` -- A list of lists of algebra coefficients defining the
@@ -70,7 +70,7 @@ def _CreateRelationsMatrix(module, relations, source_degs, target_degs):
 
     for all `i, j`.
 
-    OUTPUT::
+    OUTPUT:
 
     - ``block_matrix`` -- A list of lists representing a matrix of linear
       transformations `(T_{ij})`.  Each transformtion `T_{ij}` is the linear map
@@ -161,13 +161,13 @@ class FP_ModuleMorphism(SageMorphism):
     r"""
     Create a homomorphism between finitely presented graded modules.
 
-    INPUT::
+    INPUT:
 
     - ``parent`` -- A homspace of finitely presented graded modules.
     - ``values`` -- A list of elements in the codomain.  Each element
       corresponds to a module generator in the domain.
 
-    OUTPUT:: A module homomorphism defined by sending the generator with
+    OUTPUT: A module homomorphism defined by sending the generator with
     index `i` to the corresponding element in ``values``.
 
     .. NOTE:: Never use this constructor explicitly, but rather the parent's
@@ -227,11 +227,11 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Change the base ring of this module homomorphism.
 
-        INPUT::
+        INPUT:
 
         - ``algebra`` -- a graded algebra.
 
-        OUTPUT:: An instance of this class.
+        OUTPUT: An instance of this class.
 
         EXAMPLES::
 
@@ -264,7 +264,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         The degree of this homomorphism.
 
-        OUTPUT:: The integer degree of this homomorphism, or ``None`` if this is
+        OUTPUT: The integer degree of this homomorphism, or ``None`` if this is
         the trivial homomorphism.
 
         EXAMPLES::
@@ -304,7 +304,7 @@ class FP_ModuleMorphism(SageMorphism):
         The values under this homomorphism of the module generators of the
         domain module.
 
-        OUTPUT:: A sequence of module elements of the codomain.
+        OUTPUT: A sequence of module elements of the codomain.
 
         EXAMPLES::
 
@@ -334,7 +334,7 @@ class FP_ModuleMorphism(SageMorphism):
         Implementation of this function allows Sage to make sense of the ==
         operator for instances of this class.
 
-        INPUT::
+        INPUT:
 
         - ``other`` -- An instance of this class.
 
@@ -344,7 +344,7 @@ class FP_ModuleMorphism(SageMorphism):
           and only if the homomorphisms are not equal.  Otherwise,
           return ``False``.
 
-        OUTPUT:: A boolean.
+        OUTPUT: A boolean.
 
         EXAMPLES::
 
@@ -385,7 +385,7 @@ class FP_ModuleMorphism(SageMorphism):
         and codomain is given by the formula `(f+g)(x) = f(x) + g(x)` for
         every `x` in the domain of `f`.
 
-        INPUT::
+        INPUT:
 
         - ``g`` -- A homomorphism with the same domain and codomain as this
           homomorphism.
@@ -513,7 +513,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Decide if this homomomorphism is the zero homomorphism.
 
-        OUTPUT:: The boolean value ``True`` if this homomorphism is trivial, and
+        OUTPUT: The boolean value ``True`` if this homomorphism is trivial, and
         ``False`` otherwise.
 
         EXAMPLES::
@@ -570,11 +570,11 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Evaluate the homomorphism at the given domain element ``x``.
 
-        INPUT::
+        INPUT:
 
         -  ``x``  - An element of the domain of the homomorphism.
 
-        OUTPUT:: The module element of the codomain which is the value of ``x``
+        OUTPUT: The module element of the codomain which is the value of ``x``
         under this homomorphism.
 
         EXAMPLES::
@@ -645,11 +645,11 @@ class FP_ModuleMorphism(SageMorphism):
         function cannot be presented since we do not know the degree of its
         codomain.  In this case, the return value is ``None``.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- An integer degree.
 
-        OUTPUT:: A linear function of finite dimensional vectorspaces over the
+        OUTPUT: A linear function of finite dimensional vectorspaces over the
         ground field of the algebra for this module.  The domain is isomorphic
         to the vectorspace of domain elements of degree ``n`` of this free
         module, via the choice of basis given by
@@ -742,11 +742,11 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Find an element in the inverse image of the given element.
 
-        INPUT::
+        INPUT:
 
         - ``x`` -- An element of the codomain of this morphism.
 
-        OUTPUT:: An element of the domain which maps to ``x`` under this
+        OUTPUT: An element of the domain which maps to ``x`` under this
         morphism, or ``None`` if ``x`` was not in the image of this morphism.
 
         EXAMPLES::
@@ -808,14 +808,14 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         A lift of this homomorphism over the given homomorphism ``f``.
 
-        INPUT::
+        INPUT:
 
         - ``f`` -- A homomorphism with codomain equal to the codomain of this
           homomorphism.
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism `g` with the property that this homomorphism
+        OUTPUT: A homomorphism `g` with the property that this homomorphism
         equals `f\circ g`.  If no lift exist, ``None`` is returned.
 
         ALGORITHM:
@@ -1076,12 +1076,12 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         A split of this homomorphism.
 
-        INPUT::
+        INPUT:
 
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism with the property that the composite
+        OUTPUT: A homomorphism with the property that the composite
         homomorphism `self \circ f = id` is the identity homomorphism.  If no
         such split exist, ``None`` is returned.
 
@@ -1128,7 +1128,7 @@ class FP_ModuleMorphism(SageMorphism):
         finitely presented modules, the homology module is a finitely
         presented quotient of the kernel sub module `\ker(g) \subset N`.
 
-        INPUT::
+        INPUT:
 
         - ``f`` -- A homomorphism with codomain equal to the domain of this
           homomorphism, and image contained in the kernel of this homomorphism.
@@ -1140,7 +1140,7 @@ class FP_ModuleMorphism(SageMorphism):
         - ``verbose`` -- A boolean to enable progress messages.  (optional,
           default: ``False``)
 
-        OUTPUT:: A quotient homomorphism `\ker(self) \to H`, where `H` is
+        OUTPUT: A quotient homomorphism `\ker(self) \to H`, where `H` is
         isomorphic to `H(self, f)` in degrees less than or equal to ``top_dim``.
 
         .. NOTE::
@@ -1178,11 +1178,11 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         The suspension of this morphism by the given degree ``t``.
 
-        INPUT::
+        INPUT:
 
         - ``t`` -- An integer by which the morphism is suspended.
 
-        OUTPUT:: The morphism which is the suspension of this morphism by the
+        OUTPUT: The morphism which is the suspension of this morphism by the
         degree ``t``.
 
         EXAMPLES::
@@ -1231,7 +1231,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Compute the cokernel of this homomorphism.
 
-        OUTPUT:: The natural projection from the codomain of this homomorphism
+        OUTPUT: The natural projection from the codomain of this homomorphism
         to its cokernel.
 
         EXAMPLES::
@@ -1270,7 +1270,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Compute the kernel of this homomorphism.
 
-        INPUT::
+        INPUT:
 
         - ``top_dim`` -- An integer used by this function to stop the
           computation at the given degree, or the value ``None`` if no
@@ -1279,7 +1279,7 @@ class FP_ModuleMorphism(SageMorphism):
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism into `\ker(self)` which is an isomorphism in
+        OUTPUT: A homomorphism into `\ker(self)` which is an isomorphism in
         degrees less than or equal to ``top_dim``.
 
         .. NOTE::
@@ -1347,7 +1347,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Compute the image of this homomorphism.
 
-        INPUT::
+        INPUT:
 
         - ``top_dim`` -- An integer used by this function to stop the
           computation at the given degree, or the value ``None`` if no
@@ -1356,7 +1356,7 @@ class FP_ModuleMorphism(SageMorphism):
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism into `\operatorname{im}(self)` which is an
+        OUTPUT: A homomorphism into `\operatorname{im}(self)` which is an
         isomorphism in degrees less than or equal to ``top_dim``.
 
         .. NOTE::
@@ -1418,7 +1418,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Return ``True`` if and only if this homomorphism has a trivial kernel.
 
-        INPUT::
+        INPUT:
 
         - ``top_dim`` -- An integer used by this function to stop the
           computation at the given degree, or the value ``None`` if no termination
@@ -1478,7 +1478,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Resolve the kernel of this homomorphism by a free module.
 
-        INPUT::
+        INPUT:
 
         - ``top_dim`` -- An integer used by this function to stop the
           computation at the given degree, or the value ``None`` if no termination
@@ -1487,7 +1487,7 @@ class FP_ModuleMorphism(SageMorphism):
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism `j: F \rightarrow D` where `D` is the domain of
+        OUTPUT: A homomorphism `j: F \rightarrow D` where `D` is the domain of
         this homomorphism, `F` is free and such that
         `\ker(self) = \operatorname{im}(j)` in all degrees less than or equal
         to ``top_dim``.
@@ -1617,7 +1617,7 @@ class FP_ModuleMorphism(SageMorphism):
         r"""
         Resolve the image of this homomorphism by a free module.
 
-        INPUT::
+        INPUT:
 
         - ``top_dim`` -- An integer used by this function to stop the
           computation at the given degree, or the value ``None`` if no termination
@@ -1626,7 +1626,7 @@ class FP_ModuleMorphism(SageMorphism):
         - ``verbose`` -- A boolean to enable progress messages. (optional,
           default: ``False``)
 
-        OUTPUT:: A homomorphism `j: F \rightarrow C` where `C` is the codomain
+        OUTPUT: A homomorphism `j: F \rightarrow C` where `C` is the codomain
         of this homomorphism, `F` is free, and
         `\operatorname{im}(self) = \operatorname{im}(j)` in all degrees less
         than or equal to ``top_dim``.

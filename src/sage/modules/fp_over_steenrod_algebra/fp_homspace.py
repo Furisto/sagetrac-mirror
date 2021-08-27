@@ -35,11 +35,11 @@ TESTS:
 
 AUTHORS:
 
-    - Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
-    - Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
-      original software to Sage version 8.9.
-    - Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
-      new documentation and tests.
+- Robert R. Bruner, Michael J. Catanzaro (2012): Initial version.
+- Sverre Lunoee--Nielsen and Koen van Woerden (2019-11-29): Updated the
+  original software to Sage version 8.9.
+- Sverre Lunoee--Nielsen (2020-07-01): Refactored the code and added
+  new documentation and tests.
 
 """
 
@@ -65,7 +65,7 @@ def is_FP_ModuleHomspace(x):
     r"""
     Check if the given object is of type FP_ModuleHomspace.
 
-    OUTPUT:: A boolean which is True if ``x`` is of type FP_ModuleHomspace.
+    OUTPUT: A boolean which is True if ``x`` is of type FP_ModuleHomspace.
 
     EXAMPLES::
 
@@ -100,11 +100,11 @@ class FP_ModuleHomspace(Homset):
         This function is not part of the public API, but is used by :meth:Hom
         method to create morphisms.
 
-        INPUT::
+        INPUT:
 
         - ``values`` -- An iterable of FP_Elements of the codomain.
 
-        OUTPUT:: A module homomorphism in this homspace sending the generators
+        OUTPUT: A module homomorphism in this homspace sending the generators
         of the domain module to the given values.
 
         EXAMPLES::
@@ -147,11 +147,11 @@ class FP_ModuleHomspace(Homset):
         r"""
         Create a homomorphism belonging to this homset.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- an integer degree.  (optional, default: 0)
 
-        OUTPUT:: A module homomorphism of degree ``n``.
+        OUTPUT: A module homomorphism of degree ``n``.
 
         EXAMPLES::
 
@@ -190,11 +190,11 @@ class FP_ModuleHomspace(Homset):
         r"""
         Compute a basis for the vectorspace of degree ``n`` morphisms.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- an integer degree.
 
-        OUTPUT:: A basis for the set of all module homomorphisms of degree ``n``.
+        OUTPUT: A basis for the set of all module homomorphisms of degree ``n``.
 
         EXAMPLES::
 
@@ -280,13 +280,13 @@ class FP_ModuleHomspace(Homset):
         This function is private and used by :meth:`basis_elements` and
         :meth:`an_element`.
 
-        INPUT::
+        INPUT:
 
         - ``n`` -- an integer degree.
         - ``basis`` -- boolean to decide if a basis should be returned, or just
           a single homomorphism.
 
-        OUTPUT:: A basis for the set of all module homomorphisms of degree ``n``
+        OUTPUT: A basis for the set of all module homomorphisms of degree ``n``
         if ``basis`` is True.  Otherwise a single element is returned.  In the
         latter case, this homomorphism is non-trivial if the vectorspace of all
         homomorphisms is non-trivial.

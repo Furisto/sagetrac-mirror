@@ -35,21 +35,6 @@ Finite dimensional algebras
    sage/algebras/finite_dimensional_algebras/finite_dimensional_algebra_ideal
    sage/algebras/finite_dimensional_algebras/finite_dimensional_algebra_morphism
 
-Modules over named algebras
----------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   sage/modules/fp_over_steenrod_algebra/fpa_module
-   sage/modules/fp_over_steenrod_algebra/fpa_element
-   sage/modules/fp_over_steenrod_algebra/fpa_homspace
-   sage/modules/fp_over_steenrod_algebra/fpa_morphism
-   sage/modules/fp_over_steenrod_algebra/fp_module
-   sage/modules/fp_over_steenrod_algebra/fp_element
-   sage/modules/fp_over_steenrod_algebra/fp_homspace
-   sage/modules/fp_over_steenrod_algebra/fp_morphism
-
 Named associative algebras
 --------------------------
 
