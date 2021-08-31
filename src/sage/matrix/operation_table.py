@@ -1092,7 +1092,7 @@ class OperationTable(SageObject):
             sage: R = Integers(2)
             sage: T = OperationTable(R, operation=operator.mul)
             sage: T._html_()
-            '\\begin{array}{r|*{2}{r}}\n\\hfil\\ast\\hfil&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}'
+            '<html>\\[\\begin{array}{r|*{2}{r}}\n\\hfil\\ast\\hfil&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}\\]</html>'
         """
         n = self._n
         names = self._names

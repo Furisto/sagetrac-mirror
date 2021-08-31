@@ -470,9 +470,9 @@ class BackendBase(SageObject):
             sage: T = OperationTable(R, operation=operator.mul)
             sage: out = backend.latex_formatter(T)
             sage: out.html.get_str()
-            '\\begin{array}{r|*{2}{r}}\n\\hfil\\ast\\hfil&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}'
+            '<html>\\[\\begin{array}{r|*{2}{r}}\n\\hfil\\ast\\hfil&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}\\]</html>'
             sage: out.latex.get_str()
-            '\\[{\\setlength{\\arraycolsep}{2ex}\n\\begin{array}{r|*{2}{r}}\n\\multicolumn{1}{c|}{\\ast}&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}}\\]'
+            '$$\\begin{array}{r|*{2}{r}}\n\\hfil\\ast\\hfil&a&b\\\\\\hline\n{}a&a&a\\\\\n{}b&a&b\\\\\n\\end{array}$$'
 
         TESTS::
 
