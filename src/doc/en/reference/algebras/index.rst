@@ -83,11 +83,12 @@ Various associative algebras
 ----------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    sage/algebras/associated_graded
    sage/algebras/cellular_basis
    sage/algebras/commutative_dga
+   sage/algebras/gbnp
    sage/algebras/q_system
    sage/algebras/splitting_algebra
 
