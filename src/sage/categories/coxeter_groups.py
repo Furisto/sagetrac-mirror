@@ -1986,11 +1986,11 @@ class CoxeterGroups(Category_singleton):
                 [(s1*s2*s1, s1*s2*s3*s2*s1), (s3*s2*s1, s2), (s3*s1*s2, s1)]
 
             """
-            i = self.first_descent()
+            i = self.first_descent(side='right')
             if i is None:
                 return []
-            wi = self.apply_simple_reflection(i)
-            return [(u.apply_simple_reflection(i),r.apply_conjugation_by_simple_reflection(i)) for u,r in wi.bruhat_lower_covers_reflections() if not u.has_descent(i)] + [(wi, self.parent().simple_reflection(i))]
+            wi = self.apply_simple_reflection(i, side = 'right')
+            return [(u.apply_simple_reflection(i, side='right'),r.apply_conjugation_by_simple_reflection(i)) for u,r in wi.bruhat_lower_covers_reflections() if not u.has_descent(i, side='right')] + [(wi, self.parent().simple_reflection(i))]
 
         def lower_cover_reflections(self, side='right'):
             r"""
