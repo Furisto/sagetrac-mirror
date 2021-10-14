@@ -346,7 +346,7 @@ class SubwordComplexFacet(Simplex, Element):
         r"""
         Return the fiber of ``self`` under the `\kappa` map.
 
-        The `\kappa` map sends an element `w \in W` to the unique
+        The `\kappa` map sends some elements `w \in W` to the unique
         facet of `I \in \mathcal{SC}(Q,w)` such that the root
         configuration of `I` is contained in `w(\Phi^+)`.
         In other words, `w` is in the preimage of ``self`` under
@@ -1682,7 +1682,8 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
     def minkowski_summand(self, i):
         r"""
-        Return the `i` th Minkowski summand of ``self``.
+        Return the `i` th Minkowski summand of ``self``. The brick polyhedron of ``self`` is the 
+        Minkowski sum of its associated Bruhat cone and all Minkowski summands.
 
         INPUT:
 
