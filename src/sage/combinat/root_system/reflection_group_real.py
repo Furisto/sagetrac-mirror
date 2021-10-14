@@ -746,12 +746,12 @@ class RealReflectionGroup(ComplexReflectionGroup):
             raise ValueError("side must be either 'upper' or 'lower'")
         from sage.geometry.polyhedron.constructor import Polyhedron
         if self.is_crystallographic():
-            return Polyhedron(rays = roots, ambient_dim = self.rank())
+            return Polyhedron(vertices = [[0]*self.rank()], rays = roots, ambient_dim = self.rank())
         else:
             from warnings import warn
             warn("Using floating point numbers for roots of unity. This might cause numerical errors!")
             from sage.rings.real_double import RDF
-            return Polyhedron(rays = roots, ambient_dim = self.rank(), base_ring = RDF)
+            return Polyhedron(vertices = [[0]*self.rank()], rays = roots, ambient_dim = self.rank(), base_ring = RDF)
 
     class Element(RealReflectionGroupElement, ComplexReflectionGroup.Element):
 
