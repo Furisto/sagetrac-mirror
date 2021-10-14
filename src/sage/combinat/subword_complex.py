@@ -1713,6 +1713,18 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             warn("the polytope is build with rational vertices", RuntimeWarning)
             min_sum = [[QQ(CC(v)) for v in F.extended_weight_configuration()[i]] for F in self]
         return Polyhedron(min_sum)
+    
+    def brick_polytope(self, coefficients=None):
+        r"""
+        Method deprecated. Use brick_polyhedron instead.
+        
+        .. SEEALSO::
+
+            :meth:`brick_polyhedron`
+        """
+        from warnings import warn
+        warn("brick_polytope() is deprecated; brick_polyhedron() is used instead; results are different for non-spherical subword complexes", DeprecationWarning)
+        return self.brick_polyhedron(coefficients=coefficients)
 
     def brick_polyhedron(self, coefficients=None, sign='positive'):
         r"""
@@ -1729,7 +1741,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
         - ``sign`` -- (default: ``'positive'``) must be one of the following:
         
           * ``'positive'`` - entries of the extended weight configuration are summed up as they are.
-                             The Bruhat cone is taken with a negative sign.
+            The Bruhat cone is taken with a negative sign.
           * ``'negative'`` - entries of the extended weight configuration are summed up with a negative sign.
                              The Bruhat cone is taken with a positive sign.
 
@@ -1741,25 +1753,27 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
             sage: W = ReflectionGroup(['A',2])                          # optional - gap3
             sage: SC = SubwordComplex([1,2,1,2,1], W.w0)                # optional - gap3
-            sage: X = SC.brick_polytope(); X                            # optional - gap3
+            sage: X = SC.brick_polyhedron(); X                          # optional - gap3
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 5 vertices
 
-            sage: Y = SC.brick_polytope(coefficients=[1,2]); Y          # optional - gap3
+            sage: Y = SC.brick_polyhedron(coefficients=[1,2]); Y        # optional - gap3
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 5 vertices
 
             sage: X == Y                                                # optional - gap3
             False
 
-            sage: W = CoxeterGroup(['A',2])
-            sage: SC = SubwordComplex([1,2,1,2,1], W.w0)
-            sage: X = SC.brick_polytope(); X
-            A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 5 vertices
-
             sage: W = ReflectionGroup(['H',3])                          # optional - gap3
-            sage: c = W.index_set(); Q = c + tuple(W.w0.coxeter_sorting_word(c))    # optional - gap3
+            sage: c = W.index_set()                                     # optional - gap3
+            sage: Q = c + tuple(W.w0.coxeter_sorting_word(c))           # optional - gap3
             sage: SC = SubwordComplex(Q,W.w0)                           # optional - gap3
-            sage: SC.brick_polytope()                                   # optional - gap3
-            A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 32 vertices
+            sage: SC.brick_polyhedron()                                 # optional - gap3
+            A 3-dimensional polyhedron in RDF^3 defined as the convex hull of 32 vertices
+            
+            sage: W = ReflectionGroup(['B',2])                          # optional - gap3
+            sage: Q = W.w0.reduced_word()                               # optional - gap3
+            sage: SC = SubwordComplex(Q, W.from_reduced_word([1]))      # optional - gap3
+            sage: SC.brick_polyhedron()                                 # optional - gap3
+            A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 2 vertices and 2 rays
         """
         BV = self.brick_vectors(coefficients=coefficients, sign=sign)
         G = self.group()
