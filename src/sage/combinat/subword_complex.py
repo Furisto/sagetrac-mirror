@@ -630,7 +630,7 @@ class SubwordComplexFacet(Simplex, Element):
         """
         return Cone(self.weight_configuration())
 
-    def brick_vector(self, coefficients=None):
+    def brick_vector(self, coefficients=None, sign='positive'):
         r"""
         Return the brick vector of ``self``.
 
@@ -639,8 +639,13 @@ class SubwordComplexFacet(Simplex, Element):
 
         INPUT:
 
-        - coefficients -- (optional) a list of coefficients used to
+        - ``coefficients`` -- (optional) a list of coefficients used to
           scale the fundamental weights
+        
+        - ``sign`` -- (default: ``'positive'``) must be one of the following:
+        
+          * ``'positive'`` - entries of the extended weight configuration are summed up as they are
+          * ``'negative'`` - entries of the extended weight configuration are summed up with a negative sign
 
         .. SEEALSO::
 
@@ -669,7 +674,12 @@ class SubwordComplexFacet(Simplex, Element):
             sage: F.brick_vector(coefficients=[1,2])
             (8/3, 22/3)
         """
-        return sum(self.extended_weight_configuration(coefficients=coefficients))
+        if sign == 'positive':
+            return sum(self.extended_weight_configuration(coefficients=coefficients))
+        elif sign == 'negative':
+            return -sum(self.extended_weight_configuration(coefficients=coefficients))
+        else:
+            raise ValueError("sign must be either 'positive' or 'negative'")
 
     # flip
 
@@ -1637,7 +1647,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
     # brick polytope
 
-    def brick_vectors(self, coefficients=None):
+    def brick_vectors(self, coefficients=None, sign='positive'):
         r"""
         Return the list of all brick vectors of facets of ``self``.
 
@@ -1645,6 +1655,11 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
         - coefficients -- (optional) a list of coefficients used to
           scale the fundamental weights
+        
+        - ``sign`` -- (default: ``'positive'``) must be one of the following:
+        
+          * ``'positive'`` - for brick vectors, entries of the extended weight configuration are summed up as they are
+          * ``'negative'`` - for brick vectors, entries of the extended weight configuration are summed up with a negative sign
 
         .. SEEALSO::
 
@@ -1666,7 +1681,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             sage: SC.brick_vectors(coefficients=(1,2))
             [(14/3, 22/3), (14/3, 4/3), (8/3, 22/3), (-4/3, 10/3), (-4/3, 4/3)]
         """
-        return [F.brick_vector(coefficients=coefficients) for F in self]
+        return [F.brick_vector(coefficients=coefficients, sign=sign) for F in self]
 
     def minkowski_summand(self, i):
         r"""
@@ -1699,16 +1714,24 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             min_sum = [[QQ(CC(v)) for v in F.extended_weight_configuration()[i]] for F in self]
         return Polyhedron(min_sum)
 
-    def brick_polytope(self, coefficients=None):
+    def brick_polyhedron(self, coefficients=None, sign='positive'):
         r"""
-        Return the brick polytope of ``self``.
+        Return the brick polyhedron of ``self``.
 
-        This polytope is the convex hull of the brick vectors of ``self``.
+        This polyhedron is the Minkowski sum of the convex hull of the brick vectors of ``self``
+        and the negative of the upper Bruhat cone between ``self.pi()`` and ``self.group.demazure_product( self.word() )``.
 
         INPUT:
 
         - coefficients -- (optional) a list of coefficients used to
           scale the fundamental weights
+        
+        - ``sign`` -- (default: ``'positive'``) must be one of the following:
+        
+          * ``'positive'`` - entries of the extended weight configuration are summed up as they are.
+                             The Bruhat cone is taken with a negative sign.
+          * ``'negative'`` - entries of the extended weight configuration are summed up with a negative sign.
+                             The Bruhat cone is taken with a positive sign.
 
         .. SEEALSO::
 
@@ -1738,17 +1761,19 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             sage: SC.brick_polytope()                                   # optional - gap3
             A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 32 vertices
         """
-        BV = self.brick_vectors(coefficients=coefficients)
+        BV = self.brick_vectors(coefficients=coefficients, sign=sign)
         G = self.group()
-        from sage.rings.rational_field import QQ
-        if G.coxeter_matrix().is_crystallographic():
-            BV = [[QQ(v) for v in V] for V in BV]
+        if sign == 'positive':
+            BC = -G.bruhat_cone(self.pi(), G.demazure_product(self.word()))
+        elif sign == 'negative':
+            BC = G.bruhat_cone(self.pi(), G.demazure_product(self.word()))
         else:
-            from sage.rings.all import CC
-            from warnings import warn
-            warn("the polytope is build with rational vertices", RuntimeWarning)
-            BV = [[QQ(CC(v).real()) for v in V] for V in BV]
-        return Polyhedron(BV)
+            raise ValueError("sign must be either 'positive' or 'negative'")
+        if G.coxeter_matrix().is_crystallographic():
+            return Polyhedron(BV, ambient_dim = G.rank()) + BC
+        else:
+            from sage.rings.real_double import RDF
+            return Polyhedron(BV, ambient_dim = G.rank(), base_ring = RDF) + BC
 
     def barycenter(self):
         """
