@@ -398,12 +398,11 @@ class SubwordComplexFacet(Simplex, Element):
 
     def is_vertex(self):
         r"""
-        Return ``True`` if ``self`` is a vertex of the brick polytope
+        Return ``True`` if ``self`` is a vertex of the brick polyhedron
         of ``self.parent``.
 
-        A facet is a vertex of the brick polytope if its root cone is
-        pointed. Note that this property is always satisfied for
-        root-independent subword complexes.
+        A facet is a vertex of the brick polytope if and only if its root cone is
+        pointed.
 
         .. SEEALSO::
 
@@ -435,9 +434,6 @@ class SubwordComplexFacet(Simplex, Element):
             sage: F = SC([0,1,2,6]); F.is_vertex()
             False
         """
-        S = self.parent()
-        if S.is_root_independent():
-            return True
         return self.root_cone().is_strictly_convex()
 
     @cached_method
@@ -1775,6 +1771,8 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             sage: SC = SubwordComplex(Q, W.from_reduced_word([1]))      # optional - gap3
             sage: SC.brick_polyhedron()                                 # optional - gap3
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 2 vertices and 2 rays
+            
+        REFERENCES: [JahStu]_
         """
         BV = self.brick_vectors(coefficients=coefficients, sign=sign)
         G = self.group()
