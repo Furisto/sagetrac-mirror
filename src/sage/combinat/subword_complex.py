@@ -10,7 +10,7 @@ expression for `w`.
 A subword complex is a shellable sphere if and only if the Demazure
 product of `Q` equals `w`, otherwise it is a shellable ball.
 
-The code is optimized to be used with ReflectionGroup, it works as well
+The code is optimized to be used with ReflectionGroup, most parts work as well
 with CoxeterGroup, but many methods fail for WeylGroup.
 
 EXAMPLES::
@@ -76,22 +76,22 @@ And the weight configuration also works::
     sage: F.extended_weight_configuration(coefficients=(1,2))
     [(4/3, 2/3), (4/3, 8/3), (-2/3, 2/3), (4/3, 8/3), (-2/3, 2/3)]
 
-One finally can compute the brick polytope, using all functionality
+One finally can compute the brick polyhedron, using all functionality
 on weight configurations, though it does not realize to live in
 real space::
 
-    sage: W = CoxeterGroup(['A',3]); I = list(W.index_set())
+    sage: W = ReflectionGroup(['A',3]); I = list(W.index_set())
     sage: Q = I + W.w0.coxeter_sorting_word(I)
     sage: S = SubwordComplex(Q,W.w0)
-    sage: S.brick_polytope()
+    sage: S.brick_polyhedron()
     A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 14 vertices
 
-    sage: W = CoxeterGroup(['H',3]); I = list(W.index_set())
+    sage: W = ReflectionGroup(['H',3]); I = list(W.index_set())
     sage: Q = I + W.w0.coxeter_sorting_word(I)
     sage: S = SubwordComplex(Q,W.w0)
-    sage: S.brick_polytope()
-    doctest:...: RuntimeWarning: the polytope is build with rational vertices
-    A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 32 vertices
+    sage: S.brick_polyhedron()
+    doctest:...: UserWarning: Using floating point numbers for roots of unity. This might cause numerical errors!
+    A 3-dimensional polyhedron in RDF^3 defined as the convex hull of 32 vertices
 
 AUTHORS:
 
@@ -102,6 +102,7 @@ REFERENCES:
 
 .. [KnuMil] Knutson and Miller. *Subword complexes in Coxeter groups*. Adv. Math., 184(1):161-176, 2004.
 .. [PilStu] Pilaud and Stump. *Brick polytopes of spherical subword complexes and generalized associahedra*. Adv. Math. 276:1-61, 2015.
+.. [JahStu] Jahn and Stump. *Bruhat intervals, subword complexes and brick polyhedra for finite Coxeter groups*. Preprint arXiv:2103.03715, 2021.
 """
 # ****************************************************************************
 #       Copyright (C) 2015      Christian Stump <christian.stump@gmail.com>
@@ -1645,7 +1646,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
         from sage.geometry.fan import Fan
         return Fan([F.weight_cone() for F in self])
 
-    # brick polytope
+    # brick polyhedron
 
     def brick_vectors(self, coefficients=None, sign='positive'):
         r"""
@@ -1791,11 +1792,11 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
     def barycenter(self):
         """
-        Return the barycenter of the brick polytope of ``self``.
+        Return the barycenter of the vertices of the brick polyhedron of ``self``.
 
         .. SEEALSO::
 
-            :meth:`brick_polytope`
+            :meth:`brick_polyhedron`
 
         EXAMPLES::
 
