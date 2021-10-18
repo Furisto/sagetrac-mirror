@@ -464,7 +464,7 @@ class SubwordComplexFacet(Simplex, Element):
 
     def upper_root_configuration(self):
         r"""
-        Return the positive roots of the root configuration of ``self``.
+        Return the positive counterparts of negative roots in the root configuration of ``self``.
 
         EXAMPLES::
 
