@@ -1719,18 +1719,6 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             warn("the polytope is build with rational vertices", RuntimeWarning)
             min_sum = [[QQ(CC(v)) for v in F.extended_weight_configuration()[i]] for F in self]
         return Polyhedron(min_sum)
-    
-    def brick_polytope(self, coefficients=None):
-        r"""
-        Method deprecated. Use brick_polyhedron instead.
-        
-        .. SEEALSO::
-
-            :meth:`brick_polyhedron`
-        """
-        from warnings import warn
-        warn("brick_polytope() is deprecated; brick_polyhedron() is used instead; results are different for non-spherical subword complexes", DeprecationWarning)
-        return self.brick_polyhedron(coefficients=coefficients)
 
     def brick_polyhedron(self, coefficients=None, sign='positive'):
         r"""
@@ -1796,6 +1784,9 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
         else:
             from sage.rings.real_double import RDF
             return Polyhedron(BV, ambient_dim = G.rank(), base_ring = RDF) + BC
+    
+    from sage.misc.superseded import deprecated_function_alias
+    brick_polytope = deprecated_function_alias(32669, brick_polyhedron)
 
     def barycenter(self):
         """
