@@ -1786,7 +1786,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             return Polyhedron(BV, ambient_dim = G.rank(), base_ring = RDF) + BC
     
     from sage.misc.superseded import deprecated_function_alias
-    brick_polytope = deprecated_function_alias(32669, brick_polyhedron)
+    brick_polytope = deprecated_function_alias(32681, brick_polyhedron)
 
     def barycenter(self):
         """
