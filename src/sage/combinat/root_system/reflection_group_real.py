@@ -722,7 +722,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
           * ``'upper'`` - roots of reflections corresponding to atoms in the interval [``x``, ``y``]
           * ``'lower'`` - roots of reflections corresponding to coatoms in the interval [``x``, ``y``]
         
-        - ``backend`` -- string (default: ``'ccd'``) -- The backend to use to create the polyhedron.
+        - ``backend`` -- string (default: ``'cdd'``); the backend to use to create the polyhedron
 
         EXAMPLES::
 
