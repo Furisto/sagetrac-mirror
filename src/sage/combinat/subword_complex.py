@@ -638,9 +638,9 @@ class SubwordComplexFacet(Simplex, Element):
 
         - ``coefficients`` -- (optional) a list of coefficients used to
           scale the fundamental weights
-        
+
         - ``sign`` -- (default: ``'positive'``) must be one of the following:
-        
+
           * ``'positive'`` - entries of the extended weight configuration are summed up as they are
           * ``'negative'`` - entries of the extended weight configuration are summed up with a negative sign
 
@@ -1660,9 +1660,9 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
         - coefficients -- (optional) a list of coefficients used to
           scale the fundamental weights
-        
+
         - ``sign`` -- (default: ``'positive'``) must be one of the following:
-        
+
           * ``'positive'`` - for brick vectors, entries of the extended weight configuration are summed up as they are
           * ``'negative'`` - for brick vectors, entries of the extended weight configuration are summed up with a negative sign
 
@@ -1690,7 +1690,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
     def minkowski_summand(self, i):
         r"""
-        Return the `i` th Minkowski summand of ``self``. The brick polyhedron of ``self`` is the 
+        Return the `i` th Minkowski summand of ``self``. The brick polyhedron of ``self`` is the
         Minkowski sum of its associated Bruhat cone and all Minkowski summands.
 
         INPUT:
@@ -1720,7 +1720,7 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             min_sum = [[QQ(CC(v)) for v in F.extended_weight_configuration()[i]] for F in self]
         return Polyhedron(min_sum)
 
-    def brick_polyhedron(self, coefficients=None, sign='positive'):
+    def brick_polyhedron(self, coefficients=None, sign='positive', backend='cdd'):
         r"""
         Return the brick polyhedron of ``self``.
 
@@ -1731,13 +1731,15 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
 
         - coefficients -- (optional) a list of coefficients used to
           scale the fundamental weights
-        
+
         - ``sign`` -- (default: ``'positive'``) must be one of the following:
-        
+
           * ``'positive'`` - entries of the extended weight configuration are summed up as they are.
             The Bruhat cone is taken with a negative sign.
           * ``'negative'`` - entries of the extended weight configuration are summed up with a negative sign.
                              The Bruhat cone is taken with a positive sign.
+
+        - ``backend`` -- string (default: ``'cdd'``) The backend to use to create the polyhedron.
 
         .. SEEALSO::
 
@@ -1762,28 +1764,31 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             sage: SC = SubwordComplex(Q,W.w0)                           # optional - gap3
             sage: SC.brick_polyhedron()                                 # optional - gap3
             A 3-dimensional polyhedron in RDF^3 defined as the convex hull of 32 vertices
-            
+
             sage: W = ReflectionGroup(['B',2])                          # optional - gap3
             sage: Q = W.w0.reduced_word()                               # optional - gap3
             sage: SC = SubwordComplex(Q, W.from_reduced_word([1]))      # optional - gap3
             sage: SC.brick_polyhedron()                                 # optional - gap3
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 2 vertices and 2 rays
-            
+
         REFERENCES: [JahStu]_
         """
         BV = self.brick_vectors(coefficients=coefficients, sign=sign)
         G = self.group()
         if sign == 'positive':
-            BC = -G.bruhat_cone(self.pi(), G.demazure_product(self.word()))
+            BC = -G.bruhat_cone(self.pi(), G.demazure_product(self.word()), backend=backend)
         elif sign == 'negative':
-            BC = G.bruhat_cone(self.pi(), G.demazure_product(self.word()))
+            BC = G.bruhat_cone(self.pi(), G.demazure_product(self.word()), backend=backend)
         else:
             raise ValueError("sign must be either 'positive' or 'negative'")
         if G.coxeter_matrix().is_crystallographic():
-            return Polyhedron(BV, ambient_dim = G.rank()) + BC
+            return Polyhedron(BV, ambient_dim=G.rank(), backend=backend) + BC
         else:
-            from sage.rings.real_double import RDF
-            return Polyhedron(BV, ambient_dim = G.rank(), base_ring = RDF) + BC
+            if backend == 'cdd':
+                from sage.rings.real_double import RDF as base_ring
+            else:
+                from sage.rings.qqbar import AA as base_ring
+            return Polyhedron(BV, ambient_dim=G.rank(), base_ring=base_ring, backend=backend) + BC
     
     from sage.misc.superseded import deprecated_function_alias
     brick_polytope = deprecated_function_alias(32681, brick_polyhedron)
