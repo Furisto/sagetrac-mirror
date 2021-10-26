@@ -1720,8 +1720,6 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             min_sum = [[QQ(CC(v)) for v in F.extended_weight_configuration()[i]] for F in self]
         return Polyhedron(min_sum)
 
-    from sage.misc.lazy_import import LazyImport
-
     def brick_polyhedron(self, coefficients=None, sign='positive', backend='cdd'):
         r"""
         Return the brick polyhedron of ``self``.
@@ -1787,13 +1785,13 @@ class SubwordComplex(UniqueRepresentation, SimplicialComplex):
             return Polyhedron(BV, ambient_dim=G.rank(), backend=backend) + BC
         else:
             if backend == 'cdd':
-                base_ring = LazyImport('sage.rings.real_double', 'RDF')
+                from sage.rings.real_double import RDF as base_ring
             else:
-                base_ring = LazyImport('sage.rings.real_double', 'AA')
+                from sage.rings.qqbar import AA as base_ring
             return Polyhedron(BV, ambient_dim=G.rank(), base_ring=base_ring, backend=backend) + BC
     
-    deprecated_function = LazyImport('sage.misc.superseded', 'deprecated_function_alias')
-    brick_polytope = deprecated_function(32681, brick_polyhedron)
+    from sage.misc.superseded import deprecated_function_alias
+    brick_polytope = deprecated_function_alias(32681, brick_polyhedron)
 
     def barycenter(self):
         """
