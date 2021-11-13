@@ -9,8 +9,6 @@ VERSION = "@PACKAGE_VERSION@"
 SAGE_LOCAL = "@prefix@"
 SAGE_ROOT = "@SAGE_ROOT@"
 
-MAXIMA = "@prefix@/bin/maxima"
-
 # Delete this line if your ECL can load maxima without further prodding.
 MAXIMA_FAS = "@SAGE_MAXIMA_FAS@".replace('${prefix}', SAGE_LOCAL)
 
