@@ -95,7 +95,6 @@ If :func:`os.urandom` is not supported, then the new seed comes
 from the current time, which is definitely not cryptographically
 secure. ::
 
-    sage: set_random_seed()
     sage: r = rtest()
     sage: r         # random
     (909, -0.407373370020575, 6/7*x^2 + 1, (1,2,3)(4,5), 985329107, 21461, 0.30047071049504859)
@@ -984,7 +983,6 @@ def initial_seed():
     used to retrieve the seed chosen for a new Sage run (if the user
     has not used ``set_random_seed()``). ::
 
-        sage: set_random_seed()
         sage: initial_seed()          # random
         121030915255244661507561642968348336774L
     """
