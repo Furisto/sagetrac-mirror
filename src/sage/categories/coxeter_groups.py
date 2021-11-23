@@ -1987,7 +1987,7 @@ class CoxeterGroups(Category_singleton):
 
             Tests:
 
-            Check bug discovered in :trac:`32669` is fixed
+            Check bug discovered in :trac:`32669` is fixed::
 
                 sage: W = CoxeterGroup(['A',3], implementation='permutation')
                 sage: W.w0.bruhat_lower_covers_reflections()
