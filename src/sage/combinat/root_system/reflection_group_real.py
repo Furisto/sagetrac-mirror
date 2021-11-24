@@ -27,6 +27,11 @@ AUTHORS:
 
 - Christian Stump (initial version 2011--2015)
 
+REFERENCES:
+
+.. [Dye] Dyer. *Bruhat intervals, polyhedral cones and Kazhdan-Lusztig-Stanley polynomials*. Math.Z., 215(2):223-236, 1994.
+.. [JahStu] Jahn and Stump. *Bruhat intervals, subword complexes and brick polyhedra for finite Coxeter groups*. Preprint, available at https://arxiv.org/abs/2103.03715/, 2021.
+
 .. WARNING::
 
     Uses the GAP3 package *Chevie* which is available as an
@@ -745,6 +750,11 @@ class RealReflectionGroup(ComplexReflectionGroup):
             sage: y = W.w0                                              # optional - gap3
             sage: W.bruhat_cone(x, y, side='lower')                     # optional - gap3
             A 6-dimensional polyhedron in QQ^6 defined as the convex hull of 1 vertex and 6 rays
+
+        REFERENCES:
+
+        - [Dye]_
+        - [JahStu]_
         """
         if side == 'upper':
             roots = [self.reflection_to_positive_root(x*r*x.inverse())
