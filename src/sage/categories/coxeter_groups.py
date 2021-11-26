@@ -1985,7 +1985,7 @@ class CoxeterGroups(Category_singleton):
                 sage: w.bruhat_lower_covers_reflections()
                 [(s1*s2*s1, s1*s2*s3*s2*s1), (s3*s2*s1, s2), (s3*s1*s2, s1)]
 
-            Tests:
+            TESTS:
 
             Check bug discovered in :trac:`32669` is fixed::
 
