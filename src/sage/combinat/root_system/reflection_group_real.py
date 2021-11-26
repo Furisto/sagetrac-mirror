@@ -773,19 +773,18 @@ class RealReflectionGroup(ComplexReflectionGroup):
                               rays=roots,
                               ambient_dim=self.rank(),
                               backend=backend)
+        if backend == 'cdd':
+            from warnings import warn
+            warn("Using floating point numbers for roots of unity. This might cause numerical errors!")
+            from sage.rings.real_double import RDF as base_ring
         else:
-            if backend == 'cdd':
-                from warnings import warn
-                warn("Using floating point numbers for roots of unity. This might cause numerical errors!")
-                from sage.rings.real_double import RDF as base_ring
-            else:
-                from sage.rings.qqbar import AA as base_ring
+            from sage.rings.qqbar import AA as base_ring
 
-            return Polyhedron(vertices = [[0]*self.rank()],
-                              rays=roots,
-                              ambient_dim=self.rank(),
-                              base_ring=base_ring,
-                              backend=backend)
+        return Polyhedron(vertices = [[0]*self.rank()],
+                          rays=roots,
+                          ambient_dim=self.rank(),
+                          base_ring=base_ring,
+                          backend=backend)
 
     class Element(RealReflectionGroupElement, ComplexReflectionGroup.Element):
 
