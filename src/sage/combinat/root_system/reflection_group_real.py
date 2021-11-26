@@ -753,13 +753,13 @@ class RealReflectionGroup(ComplexReflectionGroup):
 
         TESTS:
 
-        sage: W = ReflectionGroup(['A',2])                              # optional - gap3
-        sage: x = W.one()                                               # optional - gap3
-        sage: y = W.w0                                                  # optional - gap3
-        sage: W.bruhat_cone(x, y, side='nonsense')                      # optional - gap3
-        Traceback (most recent call last):
-        ...
-        ValueError: side must be either 'upper' or 'lower'
+            sage: W = ReflectionGroup(['A',2])                          # optional - gap3
+            sage: x = W.one()                                           # optional - gap3
+            sage: y = W.w0                                              # optional - gap3
+            sage: W.bruhat_cone(x, y, side='nonsense')                  # optional - gap3
+            Traceback (most recent call last):
+            ...
+            ValueError: side must be either 'upper' or 'lower'
 
         REFERENCES:
 
