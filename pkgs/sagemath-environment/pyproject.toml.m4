@@ -5,8 +5,5 @@ requires = [
         setuptools     \
         wheel          \
         sage_setup     \
-        cython         \
-        gmpy2          \
-        cysignals      \
                     ')]
 build-backend = "setuptools.build_meta"

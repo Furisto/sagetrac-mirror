@@ -1,6 +1,6 @@
-============================================================================================================
- Sage: Open Source Mathematics Software: Sage objects, elements, parents, categories, coercion, metaclasses
-============================================================================================================
+=========================================================================
+ Sage: Open Source Mathematics Software: System and software environment
+=========================================================================
 
 About SageMath
 --------------
@@ -20,16 +20,4 @@ The traditional and recommended way to install SageMath is from source via Sage-
 About this experimental pip-installable source distribution
 -----------------------------------------------------------
 
-This pip-installable source distribution `sagemath-objects` is an experimental distribution of a small part of the Sage Library.  Use at your own risk.  It provides a small, fundamental subset of the modules of the Sage library ("sagelib", `sagemath-standard`), making Sage objects, the element/parent framework, categories, the coercion system and the related metaclasses available.
-
-
-Documentation
--------------
-
-* `Categories <https://doc.sagemath.org/html/en/reference/categories/index.html>`_
-
-* `Structure <https://doc.sagemath.org/html/en/reference/structure/index.html>`_
-
-* `Coercion <https://doc.sagemath.org/html/en/reference/coercion/index.html>`_
-
-* `Classes, Metaclasses <https://doc.sagemath.org/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
+This pip-installable source distribution `sagemath-environment` is an experimental distribution of a small part of the Sage Library.  Use at your own risk.  It provides a small, fundamental subset of the modules of the Sage library ("sagelib", `sagemath-standard`), providing the connection to the system and software environment.

@@ -1,8 +1,8 @@
 # -*- conf-unix -*-
 [metadata]
-name = sagemath-objects
+name = sagemath-environment
 version = file: VERSION.txt
-description = Sage: Open Source Mathematics Software: Sage objects, elements, parents, categories, coercion, metaclasses
+description = Sage: Open Source Mathematics Software: System and software environment
 long_description = file: README.rst
 long_description_content_type = text/x-rst
 license = GNU General Public License (GPL) v2 or later
@@ -28,20 +28,4 @@ classifiers =
 python_requires = >=3.7, <3.10
 install_requires =
     esyscmd(`sage-get-system-packages install-requires \
-        cython         \
-        pkgconfig      \
-        gmpy2          \
-        cysignals      \
         | sed "2,\$s/^/    /;"')dnl
-
-scripts =
-    bin/sage
-    bin/sage-env
-    bin/sage-eval
-    bin/sage-fixdoctests
-    bin/sage-ipython
-    bin/sage-python
-    bin/sage-run
-    bin/sage-runtests
-    bin/sage-venv-config
-    bin/sage-version.sh
