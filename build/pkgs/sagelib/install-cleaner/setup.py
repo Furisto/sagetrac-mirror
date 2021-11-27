@@ -9,18 +9,9 @@ import setuptools
 from distutils import log
 from setuptools import setup
 
-# Work around a Cython problem in Python 3.8.x on macOS
-# https://github.com/cython/cython/issues/3262
-if os.uname().sysname == 'Darwin':
-    import multiprocessing
-    multiprocessing.set_start_method('fork', force=True)
-
 #########################################################
 ### Set source directory
 #########################################################
-
-# PEP 517 builds do not have . in sys.path
-sys.path.insert(0, os.path.dirname(__file__))
 
 import sage.env
 sage.env.SAGE_SRC = os.getcwd()
@@ -47,21 +38,12 @@ else:
     from sage_setup.command.sage_build import sage_build
     from sage_setup.command.sage_build_cython import sage_build_cython
     from sage_setup.command.sage_build_ext import sage_build_ext
-    from sage_setup.command.sage_install import sage_install
+    from sage_setup.command.sage_install import sage_clean
 
     cmdclass = dict(build=sage_build,
                     build_cython=sage_build_cython,
                     build_ext=sage_build_ext,
-                    install=sage_install)
-
-#########################################################
-### Testing related stuff
-#########################################################
-
-# Remove (potentially invalid) star import caches
-import sage.misc.lazy_import_cache
-if os.path.exists(sage.misc.lazy_import_cache.get_cache_file()):
-    os.unlink(sage.misc.lazy_import_cache.get_cache_file())
+                    install=sage_clean)
 
 #########################################################
 ### Discovering Sources
