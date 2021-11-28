@@ -1222,7 +1222,7 @@ class DifferentiableManifold(TopologicalManifold):
                                                            l, dest_map=dest_map)
         return self._tensor_bundles[dest_map][(k, l)]
 
-    def vector_field_module(self, dest_map: DiffMap=None, force_free=False) -> VectorFieldModule:
+    def vector_field_module(self, dest_map: Optional[DiffMap] = None, force_free: bool = False) -> VectorFieldModule:
         r"""
         Return the set of vector fields defined on ``self``, possibly
         with values in another differentiable manifold, as a module over the

@@ -38,6 +38,7 @@ REFERENCES:
 #                  http://www.gnu.org/licenses/
 #******************************************************************************
 
+from __future__ import annotations
 from sage.manifolds.differentiable.diff_map import DiffMap
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.structure.parent import Parent
@@ -186,7 +187,7 @@ class VectorFieldModule(UniqueRepresentation, Parent):
     """
     Element = VectorField
 
-    def __init__(self, domain: 'DifferentiableManifold', dest_map: DiffMap=None):
+    def __init__(self, domain: DifferentiableManifold, dest_map: Optional[DiffMap] = None):
         r"""
         Construct the module of vector fields taking values on a (a priori)
         non-parallelizable differentiable manifold.
@@ -391,7 +392,7 @@ class VectorFieldModule(UniqueRepresentation, Parent):
         else:
            return self._latex_name
 
-    def domain(self) -> 'DifferentiableManifold':
+    def domain(self) -> DifferentiableManifold:
         r"""
         Return the domain of the vector fields in this module.
 
@@ -420,7 +421,7 @@ class VectorFieldModule(UniqueRepresentation, Parent):
         """
         return self._domain
 
-    def ambient_domain(self) -> 'DifferentiableManifold':
+    def ambient_domain(self) -> DifferentiableManifold:
         r"""
         Return the manifold in which the vector fields of this module take
         their values.
@@ -1559,7 +1560,7 @@ class VectorFieldFreeModule(FiniteRankFreeModule):
                            " mapped into the {}".format(self._ambient_domain)
         return description
 
-    def domain(self) -> 'DifferentiableManifold':
+    def domain(self) -> DifferentiableManifold:
         r"""
         Return the domain of the vector fields in ``self``.
 
@@ -1590,7 +1591,7 @@ class VectorFieldFreeModule(FiniteRankFreeModule):
         """
         return self._domain
 
-    def ambient_domain(self) -> 'DifferentiableManifold':
+    def ambient_domain(self) -> DifferentiableManifold:
         r"""
         Return the manifold in which the vector fields of ``self``
         take their values.

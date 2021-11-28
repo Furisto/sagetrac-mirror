@@ -325,6 +325,8 @@ REFERENCES:
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
+from __future__ import annotations
+
 from sage.categories.fields import Fields
 from sage.categories.manifolds import Manifolds
 from sage.categories.homset import Hom
@@ -2433,9 +2435,9 @@ class TopologicalManifold(ManifoldSubset):
                       is_isomorphism=True)
 
     @overload
-    def identity_map(self: 'DifferentiableManifold') -> 'DiffMap': ...
+    def identity_map(self: TopologicalManifold) -> ContinuousMap: ...
     @overload
-    def identity_map(self: 'TopologicalManifold') -> 'ContinuousMap': ...
+    def identity_map(self: DifferentiableManifold) -> DiffMap: ...
     @cached_method
     def identity_map(self):
         r"""
@@ -2709,8 +2711,8 @@ class TopologicalManifold(ManifoldSubset):
 
 _manifold_id = Integer(0)
 
-def Manifold(dim:int, name:Optional[str], latex_name:Optional[str]=None, field='real', structure='smooth',
-             start_index=0, **extra_kwds) ->  Union[TopologicalManifold, 'DifferentiableManifold']:
+def Manifold(dim: int, name: Optional[str], latex_name: Optional[str] = None, field: str = 'real', structure: str = 'smooth',
+             start_index: int = 0, **extra_kwds) -> Union[TopologicalManifold, DifferentiableManifold]:
     r"""
     Construct a manifold of a given type over a topological field.
 

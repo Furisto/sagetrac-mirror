@@ -44,6 +44,7 @@ REFERENCES:
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
+from __future__ import annotations
 from typing import Optional, TYPE_CHECKING
 from sage.misc.cachefunc import cached_method
 from sage.tensor.modules.free_module_alt_form import FreeModuleAltForm
@@ -52,6 +53,7 @@ from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
 
 if TYPE_CHECKING:
     from sage.manifolds.differentiable.vectorfield_module import VectorFieldModule
+
 
 class DiffForm(TensorField):
     r"""
@@ -381,7 +383,7 @@ class DiffForm(TensorField):
         self.exterior_derivative.clear_cache()
 
     @cached_method
-    def exterior_derivative(self) -> 'DiffForm':
+    def exterior_derivative(self) -> DiffForm:
         r"""
         Compute the exterior derivative of ``self``.
 
@@ -1184,8 +1186,8 @@ class DiffFormParal(FreeModuleAltForm, TensorFieldParal, DiffForm):
         no symmetry;  no antisymmetry
 
     """
-    def __init__(self, vector_field_module: 'VectorFieldModule', degree: int, name: Optional[str]=None,
-                 latex_name: Optional[str]=None):
+    def __init__(self, vector_field_module: VectorFieldModule, degree: int, name: Optional[str] = None,
+                 latex_name: Optional[str] = None):
         r"""
         Construct a differential form.
 
@@ -1338,13 +1340,13 @@ class DiffFormParal(FreeModuleAltForm, TensorFieldParal, DiffForm):
         return TensorFieldParal.__call__(self, *args)
 
     @cached_method
-    def exterior_derivative(self) -> 'DiffFormParal':
+    def exterior_derivative(self) -> DiffFormParal:
         r"""
         Compute the exterior derivative of ``self``.
 
         OUTPUT:
 
-        - instance of :class:`DiffForm` representing the exterior derivative
+        - instance of :class:`DiffFormParal` representing the exterior derivative
           of the differential form
 
         EXAMPLES:

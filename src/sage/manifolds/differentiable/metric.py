@@ -39,6 +39,7 @@ REFERENCES:
 #  the License, or (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
+from __future__ import annotations
 from typing import overload, TYPE_CHECKING
 
 from sage.rings.integer import Integer
@@ -1621,11 +1622,9 @@ class PseudoRiemannianMetric(TensorField):
         return self._sqrt_abs_dets[frame]
 
     @overload
-    def volume_form(self) -> 'DiffForm':
-        pass
+    def volume_form(self) -> DiffForm: ...
     @overload
-    def volume_form(self, contra: int) -> TensorField:
-        pass
+    def volume_form(self, contra: int) -> TensorField: ...
     def volume_form(self, contra=0):
         r"""
         Volume form (Levi-Civita tensor) `\epsilon` associated with the metric.

@@ -51,6 +51,8 @@ REFERENCES:
 #  the License, or (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
+
+from __future__ import annotations
 from typing import Optional, Tuple, TYPE_CHECKING
 
 from sage.rings.integer import Integer
@@ -398,7 +400,7 @@ class TensorField(ModuleElementWithMutability):
         ValueError: the name of an immutable element cannot be changed
 
     """
-    def __init__(self, vector_field_module: 'VectorFieldModule', tensor_type: TensorType, name: Optional[str] = None,
+    def __init__(self, vector_field_module: VectorFieldModule, tensor_type: TensorType, name: Optional[str] = None,
                  latex_name: Optional[str] = None, sym=None, antisym=None, parent=None):
         r"""
         Construct a tensor field.
@@ -836,7 +838,7 @@ class TensorField(ModuleElementWithMutability):
         """
         return self._domain
 
-    def base_module(self) -> 'VectorFieldModule':
+    def base_module(self) -> VectorFieldModule:
         r"""
         Return the vector field module on which ``self`` acts as a tensor.
 
@@ -964,7 +966,7 @@ class TensorField(ModuleElementWithMutability):
             rst.set_immutable()
         super().set_immutable()
 
-    def set_restriction(self, rst: 'TensorField'):
+    def set_restriction(self, rst: TensorField):
         r"""
         Define a restriction of ``self`` to some subdomain.
 
@@ -1031,7 +1033,7 @@ class TensorField(ModuleElementWithMutability):
                                                        latex_name=self._latex_name)
         self._is_zero = False  # a priori
 
-    def restrict(self, subdomain: 'DifferentiableManifold', dest_map: Optional['DiffMap'] = None):
+    def restrict(self, subdomain: DifferentiableManifold, dest_map: Optional[DiffMap] = None):
         r"""
         Return the restriction of ``self`` to some subdomain.
 
@@ -1381,7 +1383,7 @@ class TensorField(ModuleElementWithMutability):
         rst = self.restrict(basis._domain, dest_map=basis._dest_map)
         return rst._add_comp_unsafe(basis)
 
-    def add_comp(self, basis=None) -> 'Components':
+    def add_comp(self, basis=None) -> Components:
         r"""
         Return the components of ``self`` in a given vector frame
         for assignment.
@@ -3179,7 +3181,7 @@ class TensorField(ModuleElementWithMutability):
             resu._restrictions[rst._domain] = rst
         return resu
 
-    def contract(self, *args) -> 'TensorField':
+    def contract(self, *args) -> TensorField:
         r"""
         Contraction of ``self`` with another tensor field on one or
         more indices.

@@ -303,6 +303,7 @@ as follows::
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
+from __future__ import annotations
 from sage.tensor.modules.free_module_tensor import FreeModuleTensor
 from sage.manifolds.chart import Chart
 from sage.manifolds.differentiable.tensorfield import TensorField
@@ -1125,7 +1126,7 @@ class TensorFieldParal(FreeModuleTensor, TensorField):
         # The add_comp operation is performed on the subdomain:
         return rst.add_comp(basis=basis)
 
-    def comp(self, basis=None, from_basis=None) -> 'Components':
+    def comp(self, basis=None, from_basis=None) -> Components:
         r"""
         Return the components in a given vector frame.
 
