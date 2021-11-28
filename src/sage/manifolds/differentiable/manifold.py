@@ -3896,7 +3896,9 @@ class DifferentiableManifold(TopologicalManifold):
                                                                AffineConnection
         return AffineConnection(self, name, latex_name)
 
-    def metric(self, name: str, signature: Optional[int] = None, latex_name: Optional[str] = None) -> PseudoRiemannianMetric:
+    def metric(self, name: str, signature: Optional[int] = None, 
+               latex_name: Optional[str] = None,
+               dest_map: Optional[DiffMap] = None) -> PseudoRiemannianMetric:
         r"""
         Define a pseudo-Riemannian metric on the manifold.
 
