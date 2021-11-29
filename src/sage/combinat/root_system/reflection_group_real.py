@@ -734,7 +734,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
 
           * ``'upper'`` - return the upper Bruhat cone of the interval [``x``, ``y``]
           * ``'lower'`` - return the lower Bruhat cone of the interval [``x``, ``y``]
-        
+
         - ``backend`` -- string (default: ``'cdd'``); the backend to use to create the polyhedron
 
         EXAMPLES::
@@ -767,11 +767,11 @@ class RealReflectionGroup(ComplexReflectionGroup):
         - [JahStu]_
         """
         if side == 'upper':
-            roots = [self.reflection_to_positive_root(x*r*x.inverse())
+            roots = [self.reflection_to_positive_root(x * r * x.inverse())
                      for z, r in x.bruhat_upper_covers_reflections()
                      if z.bruhat_le(y)]
         elif side == 'lower':
-            roots = [self.reflection_to_positive_root(y*r*y.inverse())
+            roots = [self.reflection_to_positive_root(y * r * y.inverse())
                      for z, r in y.bruhat_lower_covers_reflections()
                      if x.bruhat_le(z)]
         else:
@@ -779,7 +779,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
 
         from sage.geometry.polyhedron.constructor import Polyhedron
         if self.is_crystallographic():
-            return Polyhedron(vertices = [[0]*self.rank()],
+            return Polyhedron(vertices=[[0] * self.rank()],
                               rays=roots,
                               ambient_dim=self.rank(),
                               backend=backend)
@@ -790,7 +790,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
         else:
             from sage.rings.qqbar import AA as base_ring
 
-        return Polyhedron(vertices = [[0]*self.rank()],
+        return Polyhedron(vertices=[[0] * self.rank()],
                           rays=roots,
                           ambient_dim=self.rank(),
                           base_ring=base_ring,
