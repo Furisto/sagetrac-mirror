@@ -720,9 +720,9 @@ class RealReflectionGroup(ComplexReflectionGroup):
         root `\beta` given by the unique reflection `s_\beta` such that `s_\beta v = w`.
 
         The upper Bruhat cone of the interval `[x,y]` is the non-empty, polyhedral cone generated
-        by the roots cooresponding to `x \prec a` for all atoms `a` in the interval.
+        by the roots corresponding to `x \prec a` for all atoms `a` in the interval.
         The lower Bruhat cone of the interval `[x,y]` is the non-empty, polyhedral cone generated
-        by the roots cooresponding to `c \prec y` for all coatoms `c` in the interval.
+        by the roots corresponding to `c \prec y` for all coatoms `c` in the interval.
 
         INPUT:
 
