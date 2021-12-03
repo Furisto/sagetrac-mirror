@@ -751,7 +751,7 @@ class RealReflectionGroup(ComplexReflectionGroup):
             sage: W.bruhat_cone(x, y, side='lower')                     # optional - gap3
             A 6-dimensional polyhedron in QQ^6 defined as the convex hull of 1 vertex and 6 rays
 
-        TESTS:
+        TESTS::
 
             sage: W = ReflectionGroup(['A',2])                          # optional - gap3
             sage: x = W.one()                                           # optional - gap3
