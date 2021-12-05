@@ -7,7 +7,6 @@ import os
 import subprocess
 
 from . import Executable, FeatureTestResult
-from sage.cpython.string import str_to_bytes, bytes_to_str
 
 
 class Lrs(Executable):
@@ -43,6 +42,8 @@ class Lrs(Executable):
             FeatureTestResult('lrslib', True)
         """
         from sage.misc.temporary_file import tmp_filename
+        from sage.cpython.string import str_to_bytes, bytes_to_str
+
         tf_name = tmp_filename()
         with open(tf_name, 'wb') as tf:
             tf.write(str_to_bytes("V-representation\nbegin\n 1 1 rational\n 1 \nend\nvolume"))
