@@ -160,25 +160,26 @@ def load_attach_path(path=None, replace=False):
 
     EXAMPLES:
 
-    First, we extend the example given in :func:`load`'s docstring::
+    We first put an empty directory on the attach path for testing (otherwise
+    this will load ``test.py`` from the current working directory if that happens
+    to exist)::
 
         sage: sage.repl.attach.reset(); reset_load_attach_path()
         sage: load_attach_path()
         ['.']
-        sage: t_dir = tmp_dir()
-        sage: fullpath = os.path.join(t_dir, 'test.py')
-        sage: with open(fullpath, 'w') as f:
-        ....:     _ = f.write("print(37 * 3)")
-
-    We put ``SAGE_TMP`` on the attach path for testing (otherwise this will
-    load ``test.py`` from the current working directory if that happens
-    to exist)::
-
-        sage: load_attach_path(SAGE_TMP, replace=True)
+        sage: empty_dir = tmp_dir()
+        sage: load_attach_path(empty_dir, replace=True)
         sage: attach('test.py')
         Traceback (most recent call last):
         ...
         OSError: did not find file 'test.py' to load or attach
+
+    Now we extend the example given in :func:`load`'s docstring::
+
+        sage: t_dir = tmp_dir()
+        sage: fullpath = os.path.join(t_dir, 'test.py')
+        sage: with open(fullpath, 'w') as f:
+        ....:     _ = f.write("print(37 * 3)")
         sage: load_attach_path(t_dir)
         sage: attach('test.py')
         111
@@ -187,7 +188,7 @@ def load_attach_path(path=None, replace=False):
         sage: sage.repl.attach.reset(); reset_load_attach_path()
         sage: load_attach_path() == ['.']
         True
-        sage: load_attach_path(SAGE_TMP, replace=True)
+        sage: load_attach_path(empty_dir, replace=True)
         sage: load('test.py')
         Traceback (most recent call last):
         ...
