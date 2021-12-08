@@ -985,7 +985,7 @@ class DocTestController(SageObject):
             sage: from sage.doctest.control import DocTestDefaults, DocTestController
             sage: from sage.env import SAGE_SRC
             sage: import os
-            sage: dirname = os.path.join(SAGE_SRC, 'sage', 'rings', 'infinity.py')
+            sage: dirname = os.path.join(SAGE_SRC, 'sage', 'misc', 'repr.py')
             sage: DD = DocTestDefaults()
 
             sage: DC = DocTestController(DD, [dirname])
@@ -999,7 +999,7 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Doctesting 1 file.
-            sage -t .../rings/infinity.py
+            sage -t .../misc/repr.py
                 [... tests, ... s]
             ----------------------------------------------------------------------
             All tests passed!
@@ -1278,10 +1278,10 @@ def run_doctests(module, options=None):
 
     EXAMPLES::
 
-        sage: run_doctests(sage.rings.infinity)
+        sage: run_doctests(sage.misc.repr)
         Running doctests with ID ...
         Doctesting 1 file.
-        sage -t .../sage/rings/infinity.py
+        sage -t .../sage/misc/repr.py
             [... tests, ... s]
         ----------------------------------------------------------------------
         All tests passed!
