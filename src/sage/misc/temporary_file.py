@@ -28,6 +28,81 @@ import os
 import tempfile
 import atexit
 
+# We do not use sage.misc.cachefunc here so that this module does not depend on
+# Cython modules.
+
+_sage_tmp = None
+
+
+def sage_tmp():
+    """
+    EXAMPLES::
+
+        sage: from sage.misc.temporary_file import sage_tmp
+        sage: sage_tmp()
+        '.../temp/...'
+    """
+    global _sage_tmp
+    if _sage_tmp is None:
+        # This duplicates code that is run when sage.misc.misc is loaded;
+        # but modularized distributions may not have sage.misc.misc.
+        from sage.env import DOT_SAGE, HOSTNAME
+        os.makedirs(DOT_SAGE, mode=0o700, exist_ok=True)
+
+        _sage_tmp = os.path.join(DOT_SAGE, 'temp', HOSTNAME, str(os.getpid()))
+        os.makedirs(_sage_tmp, exist_ok=True)
+    return _sage_tmp
+
+
+_ecl_tmp = None
+
+
+def ecl_tmp():
+    """
+    Temporary directory that should be used by ECL interfaces launched from
+    Sage.
+
+    EXAMPLES::
+
+        sage: from sage.misc.temporary_file import ecl_tmp
+        sage: ecl_tmp()
+        '.../temp/.../ecl'
+    """
+    global _ecl_tmp
+    if _ecl_tmp is None:
+        _ecl_tmp = os.path.join(sage_tmp(), 'ecl')
+        os.makedirs(_ecl_tmp, exist_ok=True)
+    return _ecl_tmp
+
+
+def spyx_tmp():
+    """
+    EXAMPLES::
+
+        sage: from sage.misc.temporary_file import spyx_tmp
+        sage: spyx_tmp()
+        '.../temp/.../spyx'
+    """
+    return os.path.join(sage_tmp(), 'spyx')
+
+
+_sage_tmp_interface = None
+
+
+def sage_tmp_interface():
+    """
+    EXAMPLES::
+
+        sage: from sage.misc.temporary_file import sage_tmp_interface
+        sage: sage_tmp_interface()
+        '.../temp/.../interface'
+    """
+    global _sage_tmp_interface
+    if _sage_tmp_interface is None:
+        _sage_tmp_interface = os.path.join(sage_tmp(), 'interface')
+        os.makedirs(_sage_tmp_interface, exist_ok=True)
+    return _sage_tmp_interface
+
 
 def delete_tmpfiles():
     """
@@ -52,8 +127,7 @@ def delete_tmpfiles():
         True
     """
     import shutil
-    from sage.misc.misc import SAGE_TMP
-    shutil.rmtree(str(SAGE_TMP), ignore_errors=True)
+    shutil.rmtree(sage_tmp(), ignore_errors=True)
 
 
 # Run when Python shuts down
@@ -96,8 +170,7 @@ def tmp_dir(name="dir_", ext=""):
         0
         sage: f.close()
     """
-    from sage.misc.misc import SAGE_TMP
-    tmp = tempfile.mkdtemp(prefix=name, suffix=ext, dir=str(SAGE_TMP))
+    tmp = tempfile.mkdtemp(prefix=name, suffix=ext, dir=sage_tmp())
     name = os.path.abspath(tmp)
     return name + os.sep
 
@@ -146,8 +219,7 @@ def tmp_filename(name="tmp_", ext=""):
         0
         sage: f.close()
     """
-    from sage.misc.misc import SAGE_TMP
-    handle, tmp = tempfile.mkstemp(prefix=name, suffix=ext, dir=str(SAGE_TMP))
+    handle, tmp = tempfile.mkstemp(prefix=name, suffix=ext, dir=sage_tmp())
     os.close(handle)
     name = os.path.abspath(tmp)
     return name
