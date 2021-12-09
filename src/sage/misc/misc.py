@@ -77,14 +77,14 @@ def sage_makedirs(dirname, mode=0o777):
 
     EXAMPLES::
 
-        sage: from sage.misc.misc import sage_makedirs
+        sage: import os
         sage: sage_makedirs(DOT_SAGE) # no output
 
     The following fails because we are trying to create a directory in
     place of an ordinary file::
 
         sage: filename = tmp_filename()
-        sage: sage_makedirs(filename)
+        sage: os.makedirs(filename, exist_ok=True)
         Traceback (most recent call last):
         ...
         FileExistsError: [Errno ...] File exists: ...
@@ -101,7 +101,7 @@ def sage_makedirs(dirname, mode=0o777):
 # restrictive permissions, since otherwise possibly just anybody can easily see
 # every command you type.
 
-sage_makedirs(DOT_SAGE, mode=0o700)
+os.makedirs(DOT_SAGE, mode=0o700, exist_ok=True)
 
 
 def try_read(obj, splitlines=False):
@@ -215,11 +215,11 @@ SAGE_TMP_INTERFACE = lazy_string(sage.misc.temporary_file.sage_tmp_interface)
 
 
 SAGE_DB = os.path.join(DOT_SAGE, 'db')
-sage_makedirs(SAGE_DB)
+os.makedirs(SAGE_DB, exist_ok=True)
 
 try:
     # Create the matplotlib config directory.
-    sage_makedirs(os.environ["MPLCONFIGDIR"])
+    os.makedirs(os.environ["MPLCONFIGDIR"], exist_ok=True)
 except KeyError:
     pass
 
