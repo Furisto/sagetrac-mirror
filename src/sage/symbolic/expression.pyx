@@ -12667,6 +12667,7 @@ cdef class Expression(Expression_abc):
 
         TESTS::
 
+            sage: from sage.repl.rich_output.display_manager import get_display_manager
             sage: dm = get_display_manager()
             sage: dm.preferences.text = 'ascii_art'
 

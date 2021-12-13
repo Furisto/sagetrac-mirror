@@ -48,9 +48,12 @@ interfaces = ['gap', 'gap3', 'giac', 'gp', 'mathematica', 'gnuplot', \
               'mathematica', 'mwrank', 'octave', 'r', \
               'singular', 'sage0', 'sage']
 
+lazy_import("sage.repl.rich_output.display_manager", "get_display_manager",
+            deprecation=33016)
 
-from sage.repl.rich_output.display_manager import get_display_manager
-if get_display_manager().is_in_terminal():
+from sage.repl.rich_output.display_manager import get_display_manager as _get_display_manager
+
+if _get_display_manager().is_in_terminal():
     from .axiom import axiom_console
     from .fricas import fricas_console
     from .gap import gap_console
