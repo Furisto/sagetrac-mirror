@@ -210,16 +210,11 @@ def all_features():
         sage: list(all_features())
         [Feature('sage.combinat'), ...]
     """
-    for feature in [sagemath_doc_html(),
-                    sage__combinat(),
-                    sage__geometry__polyhedron(),
-                    sage__graphs(),
-                    sage__plot(),
-                    sage__rings__number_field(),
-                    sage__rings__real_double(),
-                    sage__symbolic()]:
-        result = feature.is_present()
-        if logger:
-            logger.write(f'{result}, reason: {result.reason}\n')
-        if result:
-            yield feature
+    return [sagemath_doc_html(),
+            sage__combinat(),
+            sage__geometry__polyhedron(),
+            sage__graphs(),
+            sage__plot(),
+            sage__rings__number_field(),
+            sage__rings__real_double(),
+            sage__symbolic()]
