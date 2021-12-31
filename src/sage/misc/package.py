@@ -386,9 +386,9 @@ def installed_packages(exclude_pip=True):
     EXAMPLES::
 
         sage: sorted(installed_packages().keys())  # optional - build
-        [...'alabaster', ...'sage_conf', ...]
-        sage: installed_packages()['alabaster']  # optional - build, random
-        '0.7.12'
+        [...'sage_conf', ...]
+        sage: installed_packages()['sage_conf']  # optional - build, random
+        '9.5'
 
     .. SEEALSO::
 
