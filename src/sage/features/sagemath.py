@@ -252,7 +252,7 @@ def all_features():
 
         sage: from sage.features.sagemath import all_features
         sage: list(all_features())
-        [Feature('sage.combinat'), ...]
+        [...Feature('sage.combinat'), ...]
     """
     return [sagemath_doc_html(),
             sage__combinat(),
