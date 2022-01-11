@@ -3458,10 +3458,27 @@ class EllipticCurvePoint_finite_field(EllipticCurvePoint_field):
             222
         """
         k = ZZ(other)
-        Q = IntegerMulAction(ZZ, self.parent())._act_(k, self)
+        E = self.curve()
+
+        # PARI is much faster, but it silently returns the point at
+        # infinity when it tries to invert a non-unit during ellmul().
+        # Hence we fall back to the slower pure-Python implementation
+        # over non-fields.
+        if E.base_ring().is_field():
+            pariQ = pari.ellmul(E, self, k)
+            if pariQ == [0]:
+                vQ = 0
+            else:
+                assert len(pariQ) == 2
+                vQ = Sequence(tuple(pariQ) + (1,), E.base_field())
+            Q = EllipticCurvePoint_finite_field(E, vQ, check=False)
+        else:
+            Q = IntegerMulAction(ZZ, self.parent())._act_(k, self)
+
         n = getattr(self, '_order', None)
         if n is not None:
             Q._order = n // n.gcd(k)  # Lagrange's theorem
+
         return Q
 
     def discrete_log(self, Q, ord=None):
