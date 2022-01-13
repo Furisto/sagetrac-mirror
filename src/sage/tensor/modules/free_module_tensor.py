@@ -253,8 +253,16 @@ class FreeModuleTensor(ModuleElementWithMutability):
     """
     _fmodule: FiniteRankFreeModule
 
-    def __init__(self, fmodule: FiniteRankFreeModule, tensor_type, name=None, latex_name=None,
-                 sym=None, antisym=None, parent=None):
+    def __init__(
+        self,
+        fmodule: FiniteRankFreeModule,
+        tensor_type,
+        name=None,
+        latex_name=None,
+        sym=None,
+        antisym=None,
+        parent=None,
+    ):
         r"""
         TESTS::
 

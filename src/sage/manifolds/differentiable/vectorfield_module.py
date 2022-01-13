@@ -27,7 +27,7 @@ REFERENCES:
 
 """
 
-#******************************************************************************
+# ******************************************************************************
 #       Copyright (C) 2015 Eric Gourgoulhon <eric.gourgoulhon@obspm.fr>
 #       Copyright (C) 2015 Michal Bejger <bejger@camk.edu.pl>
 #       Copyright (C) 2016 Travis Scrimshaw <tscrimsh@umn.edu>
@@ -36,10 +36,9 @@ REFERENCES:
 #  as published by the Free Software Foundation; either version 2 of
 #  the License, or (at your option) any later version.
 #                  http://www.gnu.org/licenses/
-#******************************************************************************
+# ******************************************************************************
 
 from __future__ import annotations
-from typing import Optional
 from sage.manifolds.differentiable.manifold import DifferentiableManifold
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.structure.parent import Parent
@@ -47,8 +46,7 @@ from sage.categories.modules import Modules
 from sage.misc.cachefunc import cached_method
 from sage.rings.integer import Integer
 from sage.tensor.modules.finite_rank_free_module import FiniteRankFreeModule
-from sage.manifolds.differentiable.vectorfield import (VectorField,
-                                                       VectorFieldParal)
+from sage.manifolds.differentiable.vectorfield import VectorField, VectorFieldParal
 
 
 class VectorFieldModule(UniqueRepresentation, Parent):

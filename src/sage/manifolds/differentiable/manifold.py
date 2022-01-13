@@ -451,8 +451,13 @@ from sage.manifolds.differentiable.mixed_form_algebra import MixedFormAlgebra
 from sage.manifolds.differentiable.vectorframe import VectorFrame
 
 from typing import Optional, Union, TYPE_CHECKING
+
 if TYPE_CHECKING:
-    from sage.manifolds.differentiable.vectorfield_module import VectorFieldFreeModule, VectorFieldModule
+    from sage.manifolds.differentiable.vectorfield_module import (
+        VectorFieldFreeModule,
+        VectorFieldModule,
+    )
+    from sage.manifolds.differentiable.diff_map import DiffMap
 
 ###############################################################################
 
@@ -1225,7 +1230,9 @@ class DifferentiableManifold(TopologicalManifold):
                                                            l, dest_map=dest_map)
         return self._tensor_bundles[dest_map][(k, l)]
 
-    def vector_field_module(self, dest_map: Optional[DiffMap] = None, force_free: bool = False) -> Union[VectorFieldModule, VectorFieldFreeModule]:
+    def vector_field_module(
+        self, dest_map: Optional[DiffMap] = None, force_free: bool = False
+    ) -> Union[VectorFieldModule, VectorFieldFreeModule]:
         r"""
         Return the set of vector fields defined on ``self``, possibly
         with values in another differentiable manifold, as a module over the

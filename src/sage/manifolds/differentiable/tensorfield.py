@@ -60,15 +60,14 @@ from sage.tensor.modules.free_module_tensor import FreeModuleTensor
 from sage.tensor.modules.tensor_with_indices import TensorWithIndices
 
 from typing import Optional, TYPE_CHECKING, Tuple, TypeVar, Union
+
 if TYPE_CHECKING:
     from sage.manifolds.differentiable.vectorfield_module import VectorFieldModule
     from sage.manifolds.differentiable.manifold import DifferentiableManifold
     from sage.manifolds.differentiable.diff_map import DiffMap
-    from sage.tensor.modules.comp import Components
-    from sage.manifolds.differentiable.metric import PseudoRiemannianMetric
 
 TensorType = Tuple[int, int]
-T = TypeVar('T', bound='TensorField')
+T = TypeVar("T", bound="TensorField")
 
 
 class TensorField(ModuleElementWithMutability):
@@ -410,8 +409,16 @@ class TensorField(ModuleElementWithMutability):
     _domain: DifferentiableManifold
     _ambient_domain: DifferentiableManifold
 
-    def __init__(self, vector_field_module: VectorFieldModule, tensor_type, name=None,
-                 latex_name=None, sym=None, antisym=None, parent=None):
+    def __init__(
+        self,
+        vector_field_module: VectorFieldModule,
+        tensor_type,
+        name=None,
+        latex_name=None,
+        sym=None,
+        antisym=None,
+        parent=None,
+    ):
         r"""
         Construct a tensor field.
 
@@ -1043,7 +1050,9 @@ class TensorField(ModuleElementWithMutability):
                                                        latex_name=self._latex_name)
         self._is_zero = False  # a priori
 
-    def restrict(self: T, subdomain: DifferentiableManifold, dest_map: Optional[DiffMap] = None) -> T:
+    def restrict(
+        self: T, subdomain: DifferentiableManifold, dest_map: Optional[DiffMap] = None
+    ) -> T:
         r"""
         Return the restriction of ``self`` to some subdomain.
 
