@@ -228,17 +228,12 @@ def delsarte_bound_hamming_space(n, d, q, return_data=False, solver="PPL", isint
     from sage.numerical.mip import MIPSolverException
     A, p = _delsarte_LP_building(n, d, 0, q, isinteger, solver)
     try:
-        bd=p.solve()
+        bd = p.solve()
     except MIPSolverException as exc:
         print("Solver exception: {}".format(exc))
-        if return_data:
-            return A,p,False
-        return False
+        return (A, p, False) if return_data else False
+    return (A, p, bd) if return_data else bd
 
-    if return_data:
-        return A,p,bd
-    else:
-        return bd
 
 def delsarte_bound_additive_hamming_space(n, d, q, d_star=1, q_base=0,
                      return_data=False, solver="PPL", isinteger=False):
@@ -332,8 +327,8 @@ def delsarte_bound_additive_hamming_space(n, d, q, d_star=1, q_base=0,
     # this implementation assumes that our LP solver to be unable to do a hot
     # restart with an adjusted constraint
 
-    m = kk*n # this is to emulate repeat/until block
-    bd = q**n+1
+    m = kk * n  # this is to emulate repeat/until block
+    bd = q**n + 1
 
     while q_base**m < bd:
         # need to solve the LP repeatedly, as this is a new constraint!
@@ -347,12 +342,12 @@ def delsarte_bound_additive_hamming_space(n, d, q, d_star=1, q_base=0,
             print("Solver exception:", exc)
             return (A, p, False) if return_data else False
 
-    # rounding the bound down to the nearest power of q_base, for q=q_base^m
-    #      bd_r = roundres(log(bd, base=q_base))
-    m = -1
-    while q_base**(m + 1) < bd:
-        m += 1
-    if q_base**(m + 1) == bd:
-        m += 1
+        # rounding the bound down to the nearest power of q_base, for q=q_base^m
+        #      bd_r = roundres(log(bd, base=q_base))
+        m = -1
+        while q_base**(m + 1) < bd:
+            m += 1
+        if q_base**(m + 1) == bd:
+            m += 1
 
     return (A, p, m) if return_data else m
