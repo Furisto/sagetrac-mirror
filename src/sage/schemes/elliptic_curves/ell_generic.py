@@ -1909,7 +1909,7 @@ class EllipticCurve_generic(WithEqualityById, plane_curve.ProjectivePlaneCurve):
 
         return self.__multiple_x_numerator(n, x)
 
-    @cached_method
+    @cached_method(key=lambda self,n,x: (n,x,x.parent()))
     def __multiple_x_numerator(self, n, x):
         r"""
         Helper method for :meth:`_multiple_x_numerator` which adds caching.
@@ -1982,7 +1982,7 @@ class EllipticCurve_generic(WithEqualityById, plane_curve.ProjectivePlaneCurve):
 
         return self.__multiple_x_denominator(n, x)
 
-    @cached_method
+    @cached_method(key=lambda self,n,x: (n,x,x.parent()))
     def __multiple_x_denominator(self, n, x):
         r"""
         Helper method for :meth:`_multiple_x_denominator` which adds caching.
