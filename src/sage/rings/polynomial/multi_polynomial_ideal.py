@@ -4529,6 +4529,18 @@ class MPolynomialIdeal( MPolynomialIdeal_singular_repr, \
 
             Requires computation of a Groebner basis, which can be a
             very expensive operation.
+
+        TESTS:
+
+        Check that quotient ring elements are handled correctly
+        (:trac:`33217`)::
+
+            sage: R.<T,U,V,W,X,Y,Z> = PolynomialRing(QQ, order='lex')
+            sage: I = R.ideal([T^2+U^2-1, V^2+W^2-1, X^2+Y^2+Z^2-1])
+            sage: Q.<t,u,v,w,x,y,z> = R.quotient(I)
+            sage: J = Q.ideal([u*v-x, u*w-y, t-z])
+            sage: J.reduce(t^2 - z^2)
+            0
         """
         try:
             strat = self._groebner_strategy()
@@ -4536,8 +4548,19 @@ class MPolynomialIdeal( MPolynomialIdeal_singular_repr, \
         except (TypeError, NotImplementedError, ValueError):
             pass
 
+        from ..quotient_ring import is_QuotientRing
         gb = self.groebner_basis()
-        return f.reduce(gb)
+        Q = self.ring()
+        if is_QuotientRing(Q):
+            # In quotient rings, gb is not a Gröbner basis of self, but gb0 is
+            # a (possibly non-reduced) Gröbner basis of the preimage of self in
+            # the cover ring (see :trac:`33217`). We only use Gröbner bases of
+            # pre-existing ideals to potentially take advantage of caching.
+            gb0 = Q.defining_ideal().groebner_basis() + [g.lift() for g in gb]
+            f0 = f.lift().reduce(gb0)
+            return Q._element_constructor_from_element_class(f0, reduce=False)
+        else:
+            return f.reduce(gb)
 
     def _contains_(self, f):
         r"""
