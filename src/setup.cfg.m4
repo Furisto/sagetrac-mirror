@@ -26,7 +26,7 @@ classifiers =
     Topic :: Scientific/Engineering :: Mathematics
 
 [options]
-python_requires = >=3.7, <3.10
+python_requires = >=3.7, <3.11
 install_requires =
     esyscmd(`sage-get-system-packages install-requires \
         sage_conf \
@@ -45,7 +45,7 @@ dnl From build/pkgs/sagelib/dependencies
         pplpy          \
         memory_allocator \
         requests       \
-        | sed "2,\$s/^/    /;"')dnl
+        | sed "2,\$s/^/    /;"')dnl'
 dnl From Makefile.in: SAGERUNTIME
     esyscmd(`sage-get-system-packages install-requires \
         ipython        \
